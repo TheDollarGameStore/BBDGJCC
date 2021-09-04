@@ -17,7 +17,7 @@ public class GridTile : MonoBehaviour
         switch(newTower)
         {
             case Constants.Towers.Brogle:
-                Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Brogle - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
+                tower = Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Brogle - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity).GetComponent<ITower>();
                 break;
         }
 

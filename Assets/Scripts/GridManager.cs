@@ -41,7 +41,7 @@ public class GridManager : MonoBehaviour
             for (int x = 0; x < columns; x++)
             {
                 total++;
-                GameObject newTile = Instantiate(tilePrefab, new Vector2((x - (columns / 2f) + 0.5f) * Constants.gridWidth, (y - (rows / 2f) + 0.5f) * Constants.gridHeight), Quaternion.identity);
+                GameObject newTile = Instantiate(tilePrefab, (Vector2)transform.position +  new Vector2((x - (columns / 2f) + 0.5f) * Constants.gridWidth, (y - (rows / 2f) + 0.5f) * Constants.gridHeight), Quaternion.identity);
                 newTile.GetComponent<SpriteRenderer>().color = (total % 2) == 1 ? Constants.lightPink : Constants.darkPink;
                 tiles[y, x] = newTile.GetComponent<GridTile>();
             }

@@ -7,8 +7,11 @@ public class IEnemy : MonoBehaviour
     public Constants.Enemies enemyType;
     public int health;
     public float moveSpeedSquaresPerSecond;
+    public AnimationCurve speedCurve;
 
     private float leftColumnX;
+    private float timePassed = 0;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -19,6 +22,11 @@ public class IEnemy : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        timePassed += Time.deltaTime;
+        if (timePassed >= 1)
+        {
+            timePassed = 0;
+        }
         Move();
     }
 
@@ -26,7 +34,8 @@ public class IEnemy : MonoBehaviour
     {
         if (transform.position.x > leftColumnX)
         {
-            transform.position += Vector3.left * moveSpeedSquaresPerSecond * Constants.gridWidth * Time.deltaTime;
+            float speed = speedCurve.Evaluate(timePassed) * Time.deltaTime;
+            transform.position += Vector3.left * moveSpeedSquaresPerSecond * 1.9f * Constants.gridWidth * speed;
         }
     }
 }

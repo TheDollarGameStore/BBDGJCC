@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
     public int columns;
 
     public List<GameObject> towerPrefabs;
+    public List<GameObject> enemyPrefabs;
 
     private void Awake()
     {

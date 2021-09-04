@@ -21,6 +21,9 @@ public class Wobble : MonoBehaviour
     [SerializeField]
     private bool wobbleOnStart = false;
 
+    [HideInInspector]
+    public bool isWobbling = false;
+
     void Start()
     {
         defaultScale = transform.localScale;
@@ -42,6 +45,7 @@ public class Wobble : MonoBehaviour
         {
             scale = 0;
             currentAmplitude = 0;
+            isWobbling = false;
         }
 
         transform.localScale = defaultScale + new Vector2(scale, scale);
@@ -51,5 +55,6 @@ public class Wobble : MonoBehaviour
     public void DoTheWobble()
     {
         currentAmplitude = amplitude;
+        isWobbling = true;
     }
 }

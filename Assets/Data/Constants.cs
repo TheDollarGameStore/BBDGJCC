@@ -11,4 +11,6 @@ public class Constants
     public static Color32 darkPink = new Color32(253, 52, 155, 255);
 
     public enum Towers {None, Brogle, Cabbage, Cherry, Tomato }
+
+    public enum Enemies {Cupcake, Doughnut };
 }

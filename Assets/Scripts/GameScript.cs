@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour
 {
     public Slider loadingSlider;
+    public GameObject hudGameObject;
     public GameObject pauseMenuGameObject;
 
     public void MainMenu()
@@ -19,6 +20,7 @@ public class GameScript : MonoBehaviour
     {
         if (context.started)
         {
+            hudGameObject.SetActive(!hudGameObject.activeSelf);
             pauseMenuGameObject.SetActive(!pauseMenuGameObject.activeSelf);
         }
     }

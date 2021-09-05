@@ -369,4 +369,4 @@ MonoBehaviour:
   hpBar: {fileID: 7167486007588423816}
   maxHp: 50
   cooldown: 10
-  projectile: {fileID: 4783019675021715327, guid: 1795e9d504c517045bd7a727fb035832, type: 3}
+  projectile: {fileID: 268076066828264792, guid: 5e592d7aaf8f81647818645a10508b94, type: 3}

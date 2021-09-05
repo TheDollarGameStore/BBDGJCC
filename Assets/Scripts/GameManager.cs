@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI disciplineCounter;
 
+    private int disciplineShow;
+
     public int discipline;
 
     // Start is called before the first frame update
@@ -22,17 +24,29 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateDiscipline(0);
+        disciplineShow = discipline;
+        disciplineCounter.text = disciplineShow.ToString();
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (disciplineShow < discipline)
+        {
+            disciplineShow+= 5;
+
+            disciplineCounter.text = disciplineShow.ToString();
+        }
+
+        if (disciplineShow > discipline)
+        {
+            disciplineShow -= 5;
+
+            disciplineCounter.text = disciplineShow.ToString();
+        }
     }
 
     public void UpdateDiscipline(int change)
     {
         discipline += change;
-        disciplineCounter.text = discipline.ToString();
     }
 }

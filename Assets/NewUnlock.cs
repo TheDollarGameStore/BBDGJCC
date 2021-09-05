@@ -11,8 +11,11 @@ public class NewUnlock : MonoBehaviour
 
     private bool shook;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         targetScale = transform.localScale;
         transform.localScale = targetScale * 10;
     }
@@ -29,6 +32,7 @@ public class NewUnlock : MonoBehaviour
             if (!shook)
             {
                 shook = true;
+                audioSource.Play();
                 Instantiate(screenShake, transform.position, Quaternion.identity);
             }
 

@@ -13,16 +13,22 @@ public class UnlockManager : MonoBehaviour
     public GameObject goodText;
     public GameObject badText;
 
+    private AudioSource[] audioSources;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSources = GetComponents<AudioSource>();
+
         if (goodUnlock)
         {
+            audioSources[1].Play();
             greenBack.SetActive(true);
             goodText.SetActive(true);
         }
         else
         {
+            audioSources[0].Play();
             redBack.SetActive(true);
             badText.SetActive(true);
         }

@@ -38,4 +38,19 @@ public class IEnemy : MonoBehaviour
             transform.position += Vector3.left * moveSpeedSquaresPerSecond * 1.9f * Constants.gridWidth * speed;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
+
+            health -= projectile.damage;
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }

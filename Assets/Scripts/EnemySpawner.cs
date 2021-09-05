@@ -60,7 +60,11 @@ public class EnemySpawner : MonoBehaviour
 
             Constants.Enemies nextEnemy = enemyStack.Dequeue();
 
-            Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
+            GameObject newEnemy = Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
+            IEnemy enemy = newEnemy.GetComponent<IEnemy>();
+            enemy.row = enemyRow;
+            enemy.col = enemyColumn;
+
         }
     }
 }

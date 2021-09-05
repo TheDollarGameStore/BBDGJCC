@@ -7,9 +7,15 @@ public class IceCream : IEnemy
     // Update is called once per frame
     new void Update()
     {
-        if (!GetComponent<Wobble>().isWobbling)
+        base.Update();
+        DoDamage();
+    }
+
+    new void DoDamage()
+    {
+        if (targetTile != null && targetTile.tower != null)
         {
-            base.Update();
+            targetTile.tower.Freeze();
         }
     }
 }

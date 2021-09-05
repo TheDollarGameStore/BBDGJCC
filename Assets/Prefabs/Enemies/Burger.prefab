@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4879928372331730413}
   - component: {fileID: 5731664191869028131}
   m_Layer: 0
-  m_Name: Cupcake
+  m_Name: Burger
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  health: 10
+  health: 6
   moveSpeedSquaresPerSecond: 1
   speedCurve:
     serializedVersion: 2

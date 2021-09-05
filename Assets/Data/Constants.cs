@@ -16,5 +16,5 @@ public class Constants
 
     public enum Towers {None, Brogle, Cabbage, Cherry, Tomato }
 
-    public enum Enemies {Cupcake, Doughnut };
+    public enum Enemies {Burger, Doughnut, IceCream  };
 }

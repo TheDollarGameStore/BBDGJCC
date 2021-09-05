@@ -12,10 +12,13 @@ public class IEnemy : MonoBehaviour
     private float leftColumnX;
     private float timePassed = 0;
 
+    private SpriteRenderer sr;
+
 
     // Start is called before the first frame update
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         leftColumnX = GridManager.instance.transform.position.x + (0 - (GridManager.instance.columns / 2f) + 0.5f) * Constants.gridWidth;
     }
 
@@ -28,6 +31,7 @@ public class IEnemy : MonoBehaviour
             timePassed = 0;
         }
         Move();
+        HandleColors();
     }
 
     public void Move()
@@ -39,13 +43,21 @@ public class IEnemy : MonoBehaviour
         }
     }
 
+    private void HandleColors()
+    {
+        sr.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
+            sr.color = Constants.damage;
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
             health -= projectile.damage;
+
+            Destroy(collision.gameObject);
 
             if (health <= 0)
             {

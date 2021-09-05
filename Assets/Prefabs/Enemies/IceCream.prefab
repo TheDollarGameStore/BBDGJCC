@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4297790510991140552}
   - component: {fileID: 7410106944731068985}
   - component: {fileID: -438725697446252385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IceCream
   m_TagString: Enemy
   m_Icon: {fileID: 0}

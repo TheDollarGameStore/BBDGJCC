@@ -8,8 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public int initialWait;
     public int minTimeBetweenSpawns;
     public int maxTimeBetweenSpawns;
-    public List<Constants.Enemies> enemyList;
-    private Stack<Constants.Enemies> enemyStack = new Stack<Constants.Enemies>();
+    public Constants.Enemies[] enemyList;
+    private Queue<Constants.Enemies> enemyStack = new Queue<Constants.Enemies>();
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (Constants.Enemies enemy in enemyList)
         {
-            enemyStack.Push(enemy);
+            enemyStack.Enqueue(enemy);
         }
         StartCoroutine(Spawner());
     }
@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
 
             GridTile enemyTile = gridManager.tiles[enemyRow, enemyColumn];
 
-            Constants.Enemies nextEnemy = enemyStack.Pop();
+            Constants.Enemies nextEnemy = enemyStack.Dequeue();
 
             Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
         }

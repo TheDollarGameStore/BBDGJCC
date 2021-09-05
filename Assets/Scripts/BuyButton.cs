@@ -6,11 +6,27 @@ using TMPro;
 public class BuyButton : MonoBehaviour
 {
     public Constants.Towers towerType;
-    public int price;
+    private int price;
     public TextMeshProUGUI priceText;
     // Start is called before the first frame update
     void Start()
     {
+        switch (towerType)
+        {
+            case Constants.Towers.Brocolli:
+                price = Constants.brocolliPrice;
+                break;
+            case Constants.Towers.Garlic:
+                price = Constants.garlicPrice;
+                break;
+            case Constants.Towers.Tomato:
+                price = Constants.tomatoPrice;
+                break;
+            case Constants.Towers.Turnip:
+                price = Constants.turnipPrice;
+                break;
+        }
+
         priceText.text = price.ToString();
     }
 

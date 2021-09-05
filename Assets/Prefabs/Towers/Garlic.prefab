@@ -262,9 +262,9 @@ GameObject:
   - component: {fileID: 9170268448278360581}
   - component: {fileID: 9170268448278360582}
   - component: {fileID: 9170268448278360580}
-  - component: {fileID: 9170268448278360579}
+  - component: {fileID: 3199163018299969692}
   m_Layer: 0
-  m_Name: Brogle
+  m_Name: Garlic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ SpriteRenderer:
   m_SortingLayerID: 1602684205
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8dae415e0bae3fb4fb016271d2a968f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7517ea768288ac34fb64996777c20a03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
   wobbleFrequency: 4
   wobbleOnStart: 1
   isWobbling: 0
---- !u!114 &9170268448278360579
+--- !u!114 &3199163018299969692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,11 +362,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9170268448278360583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71d1c530e7e9e74ea8c4d366ccb1ccf, type: 3}
+  m_Script: {fileID: 11500000, guid: a49f37c3c6e3a68409ea6580f882dacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerType: 1
+  towerType: 2
   hpBar: {fileID: 7167486007588423816}
-  maxHp: 100
-  cooldown: 1
+  maxHp: 200
+  cooldown: 5
   projectile: {fileID: 4783019675021715327, guid: 1795e9d504c517045bd7a727fb035832, type: 3}

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unlockPrefab: {fileID: 4828387612199347988, guid: a4ac6c4532ec4b742b2d52ff565e6313, type: 3}
-  goodUnlock: 1
+  goodUnlock: 0
   greenBack: {fileID: 1833098344}
   redBack: {fileID: 1225024469}
   goodText: {fileID: 1792650443}

@@ -49,21 +49,7 @@ public class CursorManager : MonoBehaviour
         if (Mouse.current.rightButton.wasPressedThisFrame && holding != Constants.Towers.None)
         {
             GetComponent<AudioSource>().Play();
-            switch(holding)
-            {
-                case Constants.Towers.Brocolli:
-                    GameManager.instance.UpdateDiscipline(Constants.brocolliPrice);
-                    break;
-                case Constants.Towers.Garlic:
-                    GameManager.instance.UpdateDiscipline(Constants.garlicPrice);
-                    break;
-                case Constants.Towers.Tomato:
-                    GameManager.instance.UpdateDiscipline(Constants.tomatoPrice);
-                    break;
-                case Constants.Towers.Turnip:
-                    GameManager.instance.UpdateDiscipline(Constants.turnipPrice);
-                    break;
-            }
+            GameManager.instance.UpdateDiscipline(Constants.GetTowerPrice(holding));
 
             holding = Constants.Towers.None;
         }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
     public TextMeshProUGUI disciplineCounter;
+
+    public GameObject sidePanel;
 
     private int disciplineShow;
 
@@ -48,5 +51,23 @@ public class GameManager : MonoBehaviour
     public void UpdateDiscipline(int change)
     {
         discipline += change;
+        
+        BuyButton[] buyButtons = sidePanel.GetComponentsInChildren<BuyButton>();
+        foreach(BuyButton buyButton in buyButtons)
+        {
+            int price = Constants.GetTowerPrice(buyButton.towerType);
+
+            if (price > 0)
+            {
+                if (discipline >= price)
+                {
+                    buyButton.gameObject.GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    buyButton.gameObject.GetComponent<Button>().interactable = false;
+                }
+            }
+        }
     }
 }

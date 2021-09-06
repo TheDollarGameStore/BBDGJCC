@@ -22,4 +22,20 @@ public class Constants
     public enum Towers {None, Brocolli, Garlic, Tomato, Turnip }
 
     public enum Enemies {Burger, Doughnut, IceCream  };
+
+    public static int GetTowerPrice(Towers towerType)
+    {
+        switch (towerType)
+        {
+            case Towers.Brocolli:
+                return brocolliPrice;
+            case Towers.Garlic:
+                return garlicPrice;
+            case Towers.Tomato:
+                return tomatoPrice;
+            case Towers.Turnip:
+                return turnipPrice;
+        }
+        return 0;
+    }
 }

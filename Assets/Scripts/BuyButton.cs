@@ -11,21 +11,7 @@ public class BuyButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        switch (towerType)
-        {
-            case Constants.Towers.Brocolli:
-                price = Constants.brocolliPrice;
-                break;
-            case Constants.Towers.Garlic:
-                price = Constants.garlicPrice;
-                break;
-            case Constants.Towers.Tomato:
-                price = Constants.tomatoPrice;
-                break;
-            case Constants.Towers.Turnip:
-                price = Constants.turnipPrice;
-                break;
-        }
+        price = Constants.GetTowerPrice(towerType);
 
         priceText.text = price.ToString();
     }

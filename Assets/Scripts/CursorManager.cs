@@ -48,6 +48,7 @@ public class CursorManager : MonoBehaviour
 
         if (Mouse.current.rightButton.wasPressedThisFrame && holding != Constants.Towers.None)
         {
+            GetComponent<AudioSource>().Play();
             switch(holding)
             {
                 case Constants.Towers.Brocolli:

@@ -37,6 +37,7 @@ public class BuyButton : MonoBehaviour
         {
             GameManager.instance.UpdateDiscipline(-price);
             CursorManager.instance.holding = towerType;
+            GetComponent<AudioSource>().Play();
         }
     }
 }

@@ -9,6 +9,7 @@ public class GridTile : MonoBehaviour
     // Start is called before the first frame update
     public bool PlaceTower(Constants.Towers newTower)
     {
+        
         if (tower != null)
         {
             return false;
@@ -29,6 +30,8 @@ public class GridTile : MonoBehaviour
                 tower = Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Turnip - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity).GetComponent<ITower>();
                 break;
         }
+
+        GetComponent<AudioSource>().Play();
 
         return true;
     }

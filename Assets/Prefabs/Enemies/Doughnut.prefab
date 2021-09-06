@@ -117,8 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   health: 10
-  moveSpeedSquaresPerSecond: 1
   damage: 20
+  moveSpeedSquaresPerSecond: 1
+  row: 0
+  col: 0
 --- !u!61 &-1645331051408903575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 128, y: 128}
   m_EdgeRadius: 0
 --- !u!50 &6855252491381059696
 Rigidbody2D:

@@ -7,6 +7,13 @@ public class DisciplineCoin : MonoBehaviour
 {
     private bool collected;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -19,6 +26,7 @@ public class DisciplineCoin : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
                 collected = true;
+                audioSource.Play();
                 GameManager.instance.UpdateDiscipline(25);
                 Invoke("DestroyThis", 2f);
             }

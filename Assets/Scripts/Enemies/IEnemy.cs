@@ -91,7 +91,10 @@ public class IEnemy : MonoBehaviour
 
             health -= projectile.damage;
 
-            Destroy(collision.gameObject);
+            if (projectile.speed != 0)
+            {
+                Destroy(collision.gameObject);
+            }
 
             if (health <= 0)
             {

@@ -22,17 +22,24 @@ public class ITower : MonoBehaviour
     private Wobble wobbler;
 
     public GameObject projectile;
+    public bool shooter;
 
 
 
     public void Init()
     {
-        wobbler = GetComponent<Wobble>();
+        if (shooter)
+        {
+            wobbler = GetComponent<Wobble>();
+        }
         hp = maxHp;
         frozen = false;
         sr = GetComponent<SpriteRenderer>();
         hpBar.fillAmount = (float)hp / maxHp;
-        Invoke("Shoot", cooldown);
+        if (shooter)
+        {
+            Invoke("Shoot", cooldown);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -70,10 +77,13 @@ public class ITower : MonoBehaviour
         frozen = false;
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        Instantiate(projectile, transform.position, Quaternion.identity);
-        wobbler.DoTheWobble();
-        Invoke("Shoot", frozen ? cooldown * 2 : cooldown);
+        Instantiate(projectile, transform.position + new Vector3(0, 0, -9), Quaternion.identity);
+        if (shooter)
+        {
+            wobbler.DoTheWobble();
+            Invoke("Shoot", frozen ? cooldown * 2 : cooldown);
+        }
     }
 }

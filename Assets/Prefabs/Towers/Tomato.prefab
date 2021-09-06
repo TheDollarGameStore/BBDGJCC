@@ -261,7 +261,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9170268448278360581}
   - component: {fileID: 9170268448278360582}
-  - component: {fileID: 9170268448278360580}
   - component: {fileID: 7188043650302726084}
   m_Layer: 0
   m_Name: Tomato
@@ -336,23 +335,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9170268448278360580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9170268448278360583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ce2fdfd9c38b9409dbf3839723dd55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 0.075
-  settleSpeed: 0.0025
-  wobbleFrequency: 4
-  wobbleOnStart: 1
-  isWobbling: 0
 --- !u!114 &7188043650302726084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +349,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 3
   hpBar: {fileID: 7167486007588423816}
-  maxHp: 50
+  maxHp: 150
   cooldown: 1
-  projectile: {fileID: 4783019675021715327, guid: 1795e9d504c517045bd7a727fb035832, type: 3}
+  projectile: {fileID: 4257028524132961473, guid: f9652fbe95305dd41a1af1743fe28cde, type: 3}
+  shooter: 0
+  soundObject: {fileID: 1723610749016711046, guid: 07ac847de74b58748ae1d71418376248, type: 3}
+  windUpSpeed: 1
+  maxWind: 2.26
+  screenShake: {fileID: 6317242806447844036, guid: 98bed9ed891f7fb42af426dfb7f56523, type: 3}

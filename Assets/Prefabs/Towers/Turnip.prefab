@@ -370,3 +370,4 @@ MonoBehaviour:
   maxHp: 50
   cooldown: 10
   projectile: {fileID: 268076066828264792, guid: 5e592d7aaf8f81647818645a10508b94, type: 3}
+  shooter: 1

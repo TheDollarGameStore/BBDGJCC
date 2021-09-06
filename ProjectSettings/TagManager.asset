@@ -57,3 +57,24 @@ TagManager:
   - name: UI
     uniqueID: 3879270441
     locked: 0
+  - name: Tomato
+    uniqueID: 238150513
+    locked: 0
+  - name: Burger
+    uniqueID: 592637257
+    locked: 0
+  - name: Donut
+    uniqueID: 2757639311
+    locked: 0
+  - name: IceCream
+    uniqueID: 3693677641
+    locked: 0
+  - name: Brogle
+    uniqueID: 4025128527
+    locked: 0
+  - name: Garlic
+    uniqueID: 1280197737
+    locked: 0
+  - name: Turnip
+    uniqueID: 2790360809
+    locked: 0

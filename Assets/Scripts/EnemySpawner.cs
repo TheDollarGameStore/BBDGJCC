@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [HideInInspector]
+    public Constants.Enemies[] enemyList;
+
+
     public static EnemySpawner instance;
     public int initialWait;
     public int minTimeBetweenSpawns;
     public int maxTimeBetweenSpawns;
-    public Constants.Enemies[] enemyList;
-    private Queue<Constants.Enemies> enemyStack = new Queue<Constants.Enemies>();
+    [HideInInspector]
+    public Queue<Constants.Enemies> enemyStack = new Queue<Constants.Enemies>();
 
     private void Awake()
     {
@@ -19,8 +23,7 @@ public class EnemySpawner : MonoBehaviour
             Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartSpawner()
     {
         foreach (Constants.Enemies enemy in enemyList)
         {
@@ -64,6 +67,7 @@ public class EnemySpawner : MonoBehaviour
             IEnemy enemy = newEnemy.GetComponent<IEnemy>();
             enemy.row = enemyRow;
             enemy.col = enemyColumn;
+            LevelManager.instance.remainingEnemies.Add(newEnemy);
 
         }
     }

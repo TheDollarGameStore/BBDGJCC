@@ -98,6 +98,7 @@ public class IEnemy : MonoBehaviour
 
             if (health <= 0)
             {
+                LevelManager.instance.remainingEnemies.Remove(gameObject);
                 Destroy(gameObject);
             }
         }

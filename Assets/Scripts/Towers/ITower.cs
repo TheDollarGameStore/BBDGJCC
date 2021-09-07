@@ -68,6 +68,7 @@ public class ITower : MonoBehaviour
 
     public void Freeze()
     {
+        CancelInvoke("Unfreeze");
         frozen = true;
         Invoke("Unfreeze", 2f);
     }

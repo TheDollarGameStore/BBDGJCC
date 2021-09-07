@@ -7,6 +7,7 @@ public class IProjectile : MonoBehaviour
     public int damage;
     public int speed;
     public float lifetime;
+    public float ccTimer;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class IProjectile : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)(Vector2.right * speed * Time.deltaTime);
+
     }
 
     private void Despawn()

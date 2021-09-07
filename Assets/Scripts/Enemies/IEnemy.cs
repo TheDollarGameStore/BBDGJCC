@@ -22,6 +22,8 @@ public class IEnemy : MonoBehaviour
     private float currentDamage;
     private Wobble wobbler;
 
+    private bool frozen;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -29,6 +31,18 @@ public class IEnemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         currentDamage = damage;
         wobbler = GetComponent<Wobble>();
+    }
+
+    public void Freeze(float duaration)
+    {
+        CancelInvoke("Unfreeze");
+        frozen = true;
+        Invoke("Unfreeze", duaration);
+    }
+
+    private void Unfreeze()
+    {
+        frozen = false;
     }
 
     // Update is called once per frame
@@ -51,7 +65,7 @@ public class IEnemy : MonoBehaviour
     {
         if (col > 0)
         {
-            float speed = moveSpeedSquaresPerSecond * Time.deltaTime;
+            float speed = moveSpeedSquaresPerSecond * Time.deltaTime / (frozen ? 2f : 1f);
             if (targetTile == null)
             {
                 targetTile = GridManager.instance.tiles[row, col - 1];
@@ -79,7 +93,14 @@ public class IEnemy : MonoBehaviour
 
     private void HandleColors()
     {
-        sr.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+        if (frozen)
+        {
+            sr.color = Color.Lerp(sr.color, Constants.frozen, 5f * Time.deltaTime);
+        }
+        else
+        {
+            sr.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -90,6 +111,39 @@ public class IEnemy : MonoBehaviour
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
             health -= projectile.damage;
+
+            if (projectile.ccTimer != 0)
+            {
+                Freeze(projectile.ccTimer);
+            }
+
+            if (projectile.speed != 0)
+            {
+                Destroy(collision.gameObject);
+            }
+
+            if (health <= 0)
+            {
+                LevelManager.instance.remainingEnemies.Remove(gameObject);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            sr.color = Constants.damage;
+            IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
+
+            health -= projectile.damage;
+
+            if (projectile.ccTimer != 0)
+            {
+                Freeze(projectile.ccTimer);
+            }
 
             if (projectile.speed != 0)
             {

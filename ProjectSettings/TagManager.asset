@@ -51,9 +51,6 @@ TagManager:
   - name: Tiles
     uniqueID: 2673520839
     locked: 0
-  - name: Objects
-    uniqueID: 1602684205
-    locked: 0
   - name: UI
     uniqueID: 3879270441
     locked: 0
@@ -77,4 +74,7 @@ TagManager:
     locked: 0
   - name: Turnip
     uniqueID: 2790360809
+    locked: 0
+  - name: Objects
+    uniqueID: 1602684205
     locked: 0

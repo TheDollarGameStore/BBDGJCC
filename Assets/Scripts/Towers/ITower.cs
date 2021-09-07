@@ -16,6 +16,8 @@ public class ITower : MonoBehaviour
     private bool frozen;
 
     private SpriteRenderer sr;
+    private SpriteRenderer[] srs;
+    private Animator anim;
 
     public float cooldown;
 
@@ -35,6 +37,7 @@ public class ITower : MonoBehaviour
         hp = maxHp;
         frozen = false;
         sr = GetComponent<SpriteRenderer>();
+        srs = GetComponentsInChildren<SpriteRenderer>();
         hpBar.fillAmount = (float)hp / maxHp;
         if (shooter)
         {
@@ -46,6 +49,10 @@ public class ITower : MonoBehaviour
     {
         hp -= damage;
         sr.color = Constants.damage;
+        foreach (SpriteRenderer sri in srs)
+        {
+            sri.color = Constants.damage;
+        }
         hpBar.fillAmount = (float)hp / maxHp;
 
         if (hp <= 0)
@@ -59,10 +66,18 @@ public class ITower : MonoBehaviour
         if (frozen)
         {
             sr.color = Color.Lerp(sr.color, Constants.frozen, 5f * Time.deltaTime);
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Color.Lerp(sri.color, Constants.frozen, 5f * Time.deltaTime);
+            }
         }
         else
         {
             sr.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Color.Lerp(sri.color, Constants.white, 5f * Time.deltaTime);
+            }
         }
     }
 
@@ -70,12 +85,14 @@ public class ITower : MonoBehaviour
     {
         CancelInvoke("Unfreeze");
         frozen = true;
+        anim.speed = 0.5f;
         Invoke("Unfreeze", 2f);
     }
 
     private void Unfreeze()
     {
         frozen = false;
+        anim.speed = 1;
     }
 
     public void Shoot()

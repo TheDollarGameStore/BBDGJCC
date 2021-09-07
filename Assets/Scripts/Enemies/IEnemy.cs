@@ -16,11 +16,14 @@ public class IEnemy : MonoBehaviour
     public int col;
 
     private SpriteRenderer sr;
+    private SpriteRenderer[] srs;
     private float timePassed = 0;
     protected GridTile targetTile = null;
     private Vector3 targetPosition;
     private float currentDamage;
     private Wobble wobbler;
+
+    private Animator anim;
 
     private bool frozen;
 
@@ -29,6 +32,8 @@ public class IEnemy : MonoBehaviour
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        srs = GetComponentsInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
         currentDamage = damage;
         wobbler = GetComponent<Wobble>();
     }
@@ -37,12 +42,14 @@ public class IEnemy : MonoBehaviour
     {
         CancelInvoke("Unfreeze");
         frozen = true;
+        anim.speed = 0.5f;
         Invoke("Unfreeze", duaration);
     }
 
     private void Unfreeze()
     {
         frozen = false;
+        anim.speed = 1;
     }
 
     // Update is called once per frame
@@ -96,10 +103,18 @@ public class IEnemy : MonoBehaviour
         if (frozen)
         {
             sr.color = Color.Lerp(sr.color, Constants.frozen, 5f * Time.deltaTime);
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Color.Lerp(sr.color, Constants.frozen, 5f * Time.deltaTime);
+            }
         }
         else
         {
             sr.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
+            }
         }
     }
 
@@ -108,6 +123,10 @@ public class IEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Projectile"))
         {
             sr.color = Constants.damage;
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Constants.damage;
+            }
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
             health -= projectile.damage;
@@ -136,6 +155,10 @@ public class IEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Projectile"))
         {
             sr.color = Constants.damage;
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Constants.damage;
+            }
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
             health -= projectile.damage;

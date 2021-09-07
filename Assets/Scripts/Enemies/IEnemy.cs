@@ -27,10 +27,13 @@ public class IEnemy : MonoBehaviour
 
     private bool frozen;
 
+    private AudioSource audioSource;
+
 
     // Start is called before the first frame update
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
@@ -66,6 +69,12 @@ public class IEnemy : MonoBehaviour
             DoDamage();
             HandleColors();
         }
+    }
+
+    private void PlayRandomize()
+    {
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.Play();
     }
 
     public void Move()
@@ -122,6 +131,7 @@ public class IEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
+            PlayRandomize();
             sr.color = Constants.damage;
             foreach (SpriteRenderer sri in srs)
             {
@@ -154,6 +164,7 @@ public class IEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
+            PlayRandomize();
             sr.color = Constants.damage;
             foreach (SpriteRenderer sri in srs)
             {

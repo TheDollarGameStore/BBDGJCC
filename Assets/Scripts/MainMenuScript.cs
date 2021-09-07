@@ -18,6 +18,11 @@ public class MainMenuScript : MonoBehaviour
     public Button character6Button;
     public Button character7Button;
     public Button character8Button;
+    public Button level1NextButton;
+    public Button level2NextButton;
+    public Button level3NextButton;
+    public Button level4NextButton;
+    public Button level5NextButton;
     public Button achievement1Button;
     public Button achievement2Button;
     public Button achievement3Button;
@@ -55,12 +60,34 @@ public class MainMenuScript : MonoBehaviour
 
     public void Start()
     {
-        if (PlayerPrefs.HasKey("earnedHowManyAreThere"))
+        PlayerPrefs.SetInt("unlockedCollie", 1);
+        PlayerPrefs.SetInt("unlockedPatrick", 1);
+        if (PlayerPrefs.HasKey("unlockedTina"))
+        {
+            level1NextButton.interactable = true;
+        }
+        if (PlayerPrefs.HasKey("unlockedGary"))
+        {
+            level2NextButton.interactable = true;
+        }
+        if (PlayerPrefs.HasKey("unlockedSteve"))
+        {
+            level3NextButton.interactable = true;
+        }
+        if (PlayerPrefs.HasKey("unlockedTommy"))
+        {
+            level4NextButton.interactable = true;
+        }
+        if (PlayerPrefs.HasKey("unlockedIda"))
+        {
+            level5NextButton.interactable = true;
+        }
+        if (PlayerPrefs.HasKey("unlockedCabbitsu"))
         {
             endlessButton.interactable = true;
         }
-        InitializeCharacter(0, character1Button, PlayerPrefs.HasKey("unlockedTina"), "Tina turnip turns UP. This proactive, purple pisces is the heart of the party. Always willing to lend a hand or an ear, you'll find it's her words of encouragement that push you to make the right decision every time. She's simply the best!");
-        InitializeCharacter(1, character2Button, PlayerPrefs.HasKey("unlockedCollie"), "Broski, Brogle, Bro Collie goes by many names, but doesn't matter which you pick, he'll come to your beck and call. Big hair, big vibes and biiig flatulence are just some of the words used to describe your funky, floral, fibrous friend.");
+        InitializeCharacter(0, character1Button, PlayerPrefs.HasKey("unlockedCollie"), "Broski, Brogle, Bro Collie goes by many names, but doesn't matter which you pick, he'll come to your beck and call. Big hair, big vibes and biiig flatulence are just some of the words used to describe your funky, floral, fibrous friend.");
+        InitializeCharacter(1, character2Button, PlayerPrefs.HasKey("unlockedTina"), "Tina turnip turns UP. This proactive, purple pisces is the heart of the party. Always willing to lend a hand or an ear, you'll find it's her words of encouragement that push you to make the right decision every time. She's simply the best!");
         InitializeCharacter(2, character3Button, PlayerPrefs.HasKey("unlockedGary"), "Pee-ew, who invited Gary Garlic? Why, you did of course, because of his amazing health benefits! Just a shame about the smell... Best to avoid any face to face conversations for a while. And to think, all Gary really wanted was a hug.");
         InitializeCharacter(3, character4Button, PlayerPrefs.HasKey("unlockedTommy"), "Tommy's therapist keeps telling him, if you keep everything bottled up inside, one day you'll explode! And judging by how quiet he's been lately, and how red he's getting in the face... You know what? I'm just going to take a step back...");
         InitializeCharacter(4, character5Button, PlayerPrefs.HasKey("unlockedCabbitsu"), "Cabbitsu, cabbitsu, cab-bit-su. LETTUSU, LETTUSU, LET-TU-SUHHH! Kabbage is an adorable little sprite that didn't quite make our lineup, but they were simply too cute not to share. Hope they make you smile.");

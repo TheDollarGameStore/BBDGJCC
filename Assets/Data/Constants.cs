@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Constants
 {
+    public static int maxLevel = 6;
+
     public static int gridWidth = 96;
     public static int gridHeight = 96;
 

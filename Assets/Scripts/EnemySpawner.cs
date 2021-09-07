@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
     public int maxTimeBetweenSpawns;
     [HideInInspector]
     public Queue<Constants.Enemies> enemyStack = new Queue<Constants.Enemies>();
+    [HideInInspector]
+    public int endlessGroupSpawnSize;
 
     private void Awake()
     {
@@ -44,7 +46,10 @@ public class EnemySpawner : MonoBehaviour
 
         while (enemyStack.Count != 0)
         {
-            PlaceRandomEnemy();
+            for (int i = 0; i < endlessGroupSpawnSize; i++)
+            {
+                PlaceRandomEnemy();
+            }
             yield
             return new WaitForSeconds(Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns + 1));
         }
@@ -61,13 +66,16 @@ public class EnemySpawner : MonoBehaviour
 
             GridTile enemyTile = gridManager.tiles[enemyRow, enemyColumn];
 
-            Constants.Enemies nextEnemy = enemyStack.Dequeue();
 
-            GameObject newEnemy = Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
-            IEnemy enemy = newEnemy.GetComponent<IEnemy>();
-            enemy.row = enemyRow;
-            enemy.col = enemyColumn;
-            LevelManager.instance.remainingEnemies.Add(newEnemy);
+            if (enemyStack.Count > 0)
+            {
+                Constants.Enemies nextEnemy = enemyStack.Dequeue();
+                GameObject newEnemy = Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
+                IEnemy enemy = newEnemy.GetComponent<IEnemy>();
+                enemy.row = enemyRow;
+                enemy.col = enemyColumn;
+                LevelManager.instance.remainingEnemies.Add(newEnemy);
+            }
 
         }
     }

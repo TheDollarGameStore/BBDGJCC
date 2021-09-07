@@ -59,10 +59,6 @@ public class MainMenuScript : MonoBehaviour
         {
             endlessButton.interactable = true;
         }
-        if(!PlayerPrefs.HasKey("currentLevel") || PlayerPrefs.GetInt("currentLevel") > 5)
-        {
-            PlayerPrefs.SetInt("currentLevel", 1);
-        }
         InitializeCharacter(0, character1Button, PlayerPrefs.HasKey("unlockedKabbage"), "Cabbitsu, cabbitsu, cab-bit-su. LETTUSU, LETTUSU, LET-TU-SUHHH! Kabbage is an adorable little sprite that didn't quite make our lineup, but they were simply too cute not to share. Hope they make you smile.");
         InitializeCharacter(1, character2Button, PlayerPrefs.HasKey("unlockedTina"), "Tina turnip turns UP. This proactive, purple pisces is the heart of the party. Always willing to lend a hand or an ear, you'll find it's her words of encouragement that push you to make the right decision every time. She's simply the best!");
         InitializeCharacter(2, character3Button, PlayerPrefs.HasKey("unlockedCollie"), "Broski, Brogle, Bro Collie goes by many names, but doesn't matter which you pick, he'll come to your beck and call. Big hair, big vibes and biiig flatulence are just some of the words used to describe your funky, floral, fibrous friend.");
@@ -81,14 +77,9 @@ public class MainMenuScript : MonoBehaviour
         InitializeAchievement(7, achievement8Button, PlayerPrefs.HasKey("earnedLaTomatina"), "LA TOMATINA\nComplete a level using only turnips and tomatoes");
     }
 
-    public void PlayGame()
+    public void PlayGame(int level)
     {
-        StartCoroutine(LoadScene(1));
-    }
-
-    public void PlayEndlessGame()
-    {
-        PlayerPrefs.SetInt("currentLevel", -1);
+        PlayerPrefs.SetInt("currentLevel", level);
         StartCoroutine(LoadScene(1));
     }
 

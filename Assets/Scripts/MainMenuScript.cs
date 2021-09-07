@@ -86,6 +86,12 @@ public class MainMenuScript : MonoBehaviour
         StartCoroutine(LoadScene(1));
     }
 
+    public void PlayEndlessGame()
+    {
+        PlayerPrefs.SetInt("currentLevel", -1);
+        StartCoroutine(LoadScene(1));
+    }
+
     public void QuitGame()
     {
         Application.Quit();

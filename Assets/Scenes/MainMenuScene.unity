@@ -3350,7 +3350,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1198555014}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: PlayEndlessGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

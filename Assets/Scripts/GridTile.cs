@@ -19,9 +19,11 @@ public class GridTile : MonoBehaviour
         {
             case Constants.Towers.Brocolli:
                 tower = Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Brocolli - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity).GetComponent<ITower>();
+                LevelManager.instance.usedOnlyTommyTina = false;
                 break;
             case Constants.Towers.Garlic:
                 tower = Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Garlic - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity).GetComponent<ITower>();
+                LevelManager.instance.usedOnlyTommyTina = false;
                 break;
             case Constants.Towers.Tomato:
                 tower = Instantiate(GridManager.instance.towerPrefabs[(int)Constants.Towers.Tomato - 1], transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity).GetComponent<ITower>();

@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [HideInInspector]
     public Queue<Constants.Enemies> enemyStack = new Queue<Constants.Enemies>();
     [HideInInspector]
-    public int endlessGroupSpawnSize;
+    public int endlessGroupSpawnSize = 1;
 
     private void Awake()
     {

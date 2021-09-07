@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public List<GameObject> remainingEnemies;
+    [HideInInspector]
+    public bool usedOnlyTommyTina = true;
 
     private bool levelComplete = false;
 
@@ -23,7 +25,7 @@ public class LevelManager : MonoBehaviour
     public Constants.Enemies[] level4;
     public Constants.Enemies[] level5;
     public Constants.Enemies[] level6;
-    
+
 
     private void Awake()
     {
@@ -42,7 +44,6 @@ public class LevelManager : MonoBehaviour
             case -1:
                 PlayerPrefs.SetInt("endlessLevel", 0);
                 enemySpawner.enemyList = GenerateEndlessModeList();
-                enemySpawner.endlessGroupSpawnSize = 1;
                 break;
             case 1:
                 enemySpawner.enemyList = level1;
@@ -69,9 +70,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(EnemySpawner.instance.enemyStack.Count == 0 && remainingEnemies.Count == 0 && !levelComplete)
+        if (EnemySpawner.instance.enemyStack.Count == 0 && remainingEnemies.Count == 0 && !levelComplete)
         {
             int currentLevel = PlayerPrefs.GetInt("currentLevel");
+            int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
             if (currentLevel > 0)
             {
                 PlayerPrefs.SetInt("currentLevel", ++currentLevel);
@@ -79,7 +81,6 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
                 PlayerPrefs.SetInt("endlessLevel", ++endlessLevel);
 
                 EnemySpawner enemySpawner = EnemySpawner.instance;
@@ -88,10 +89,10 @@ public class LevelManager : MonoBehaviour
                 enemySpawner.StartSpawner();
             }
 
+            HandleAchievements(currentLevel, endlessLevel);
+
             if (currentLevel > Constants.maxLevel)
             {
-                PlayerPrefs.SetInt("earnedHowManyAreThere", 1);
-                PlayerPrefs.SetInt("unlockedCabbitsu", 1);
                 PlayerPrefs.SetInt("currentLevel", 1);
                 StartCoroutine(LoadScene(0));
             }
@@ -131,5 +132,57 @@ public class LevelManager : MonoBehaviour
         }
 
         return enemyList;
+    }
+
+    private void HandleAchievements(int currentLevel, int endlessLevel)
+    {
+        if (currentLevel > Constants.maxLevel)
+        {
+            PlayerPrefs.SetInt("earnedHowManyAreThere", 1);
+            PlayerPrefs.SetInt("unlockedCabbitsu", 1);
+        }
+
+        if(usedOnlyTommyTina)
+        {
+            PlayerPrefs.SetInt("earnedLaTomatina", 1);
+        }
+
+        switch (currentLevel)
+        {
+            case -1:
+                switch (endlessLevel)
+                {
+                    case 1:
+                        PlayerPrefs.SetInt("earnedOneForTheMoney", 1);
+                        break;
+                    case 2:
+                        PlayerPrefs.SetInt("earnedTwoForTheShow", 1);
+                        break;
+                    case 3:
+                        PlayerPrefs.SetInt("earnedThreeToGetReady", 1);
+                        break;
+                    case 9:
+                        PlayerPrefs.SetInt("earnedGoCatGo", 1);
+                        break;
+                }
+                break;
+            case 2:
+                PlayerPrefs.SetInt("unlockedTina", 1);
+                break;
+            case 3:
+                PlayerPrefs.SetInt("unlockedGary", 1);
+                break;
+            case 4:
+                PlayerPrefs.SetInt("unlockedSteve", 1);
+                break;
+            case 5:
+                PlayerPrefs.SetInt("unlockedTommy", 1);
+                PlayerPrefs.SetInt("earnedGettingYourGreens", 1);
+                break;
+            case 6:
+                PlayerPrefs.SetInt("unlockedIda", 1);
+                PlayerPrefs.SetInt("earnedTheDevilsYouKnow", 1);
+                break;
+        }
     }
 }

@@ -40,6 +40,7 @@ public class ITower : MonoBehaviour
         frozen = false;
         sr = GetComponent<SpriteRenderer>();
         srs = GetComponentsInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
         hpBar.fillAmount = (float)hp / maxHp;
         if (shooter)
         {

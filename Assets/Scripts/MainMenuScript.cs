@@ -60,8 +60,6 @@ public class MainMenuScript : MonoBehaviour
 
     public void Start()
     {
-        PlayerPrefs.SetInt("unlockedCollie", 1);
-        PlayerPrefs.SetInt("unlockedPatrick", 1);
         if (PlayerPrefs.HasKey("unlockedTina"))
         {
             unlockedLevel++;

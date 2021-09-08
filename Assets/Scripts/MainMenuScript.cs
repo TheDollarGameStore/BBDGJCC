@@ -129,6 +129,12 @@ public class MainMenuScript : MonoBehaviour
         StartCoroutine(LoadScene(1));
     }
 
+    public void ResetAndQuit()
+    {
+        PlayerPrefs.DeleteAll();
+        QuitGame();
+    }
+
     public void PreviousLevel()
     {
         currentLevel--;

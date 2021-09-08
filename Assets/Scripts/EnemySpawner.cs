@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -75,6 +76,9 @@ public class EnemySpawner : MonoBehaviour
                 enemy.row = enemyRow;
                 enemy.col = enemyColumn;
                 LevelManager.instance.remainingEnemies.Add(newEnemy);
+
+                Slider satisfactionSlider = GameManager.instance.satisfactionSlider.GetComponent<Slider>();
+                satisfactionSlider.value += 1;
             }
 
         }

@@ -3101,6 +3101,7 @@ MonoBehaviour:
   disciplineCounter: {fileID: 289507545}
   sidePanel: {fileID: 33506063}
   discipline: 500
+  satisfactionSlider: {fileID: 1370954235}
 --- !u!4 &2017180627
 Transform:
   m_ObjectHideFlags: 0

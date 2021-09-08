@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -64,6 +65,11 @@ public class LevelManager : MonoBehaviour
                 enemySpawner.enemyList = level6;
                 break;
         }
+
+        Slider satisfactionSlider = GameManager.instance.satisfactionSlider.GetComponent<Slider>();
+        satisfactionSlider.maxValue = enemySpawner.enemyList.Length;
+        satisfactionSlider.value = 0;
+
         enemySpawner.StartSpawner();
     }
 
@@ -86,6 +92,11 @@ public class LevelManager : MonoBehaviour
                 EnemySpawner enemySpawner = EnemySpawner.instance;
                 enemySpawner.enemyList = GenerateEndlessModeList();
                 enemySpawner.endlessGroupSpawnSize = endlessLevel * endlessGroupSizeMultiplier;
+
+                Slider satisfactionSlider = GameManager.instance.satisfactionSlider.GetComponent<Slider>();
+                satisfactionSlider.maxValue = enemySpawner.enemyList.Length;
+                satisfactionSlider.value = 0;
+
                 enemySpawner.StartSpawner();
             }
 

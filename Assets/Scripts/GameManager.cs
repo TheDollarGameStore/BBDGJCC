@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public int discipline;
 
+    public GameObject satisfactionSlider;
+
     // Start is called before the first frame update
     void Awake()
     {

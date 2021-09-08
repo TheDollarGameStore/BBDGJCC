@@ -256,6 +256,13 @@ MonoBehaviour:
   redBack: {fileID: 1225024469}
   goodText: {fileID: 1792650443}
   badText: {fileID: 4648620}
+  brogle: {fileID: 4344190868217027530, guid: 3c84283547f8548729cfcace47e7df51, type: 3}
+  patrick: {fileID: 4893746289403346778, guid: 931cc51fa7cc64d949722c98f17a28e0, type: 3}
+  tina: {fileID: 5514319883231371314, guid: 5261b08ae7fd54b048c98e975dc56888, type: 3}
+  steve: {fileID: 1268177986188228364, guid: d65c197104cb4476aaf64a5248d1f953, type: 3}
+  gary: {fileID: 6973812371704359954, guid: 869d8555edbab49d594dc6e604354db6, type: 3}
+  tommy: {fileID: 3102820060084358462, guid: f59ded03b928a4fa8b19d3d08a390673, type: 3}
+  ida: {fileID: 8794518393342789625, guid: f3e33a31baa174e30a4c8812ba1dbeab, type: 3}
 --- !u!4 &921632267
 Transform:
   m_ObjectHideFlags: 0

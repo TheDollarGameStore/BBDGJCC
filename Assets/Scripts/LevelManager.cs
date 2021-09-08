@@ -13,8 +13,12 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> remainingEnemies;
     [HideInInspector]
     public bool usedOnlyTommyTina = true;
+    [HideInInspector]
+    public Queue<Enum> unlockList = new Queue<Enum>();
 
     private bool levelComplete = false;
+    private bool hasUnlock = false;
+
 
     public int endlessEnemyBaseAmt;
     public int endlessEnemyIncreaseAmt;
@@ -39,6 +43,16 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        if (!PlayerPrefs.HasKey("unlockedPatrick"))
+        {
+            PlayerPrefs.SetInt("unlockedCollie", 1);
+            PlayerPrefs.SetInt("unlockedPatrick", 1);
+            unlockList.Enqueue(Constants.Towers.Brocolli);
+            unlockList.Enqueue(Constants.Enemies.Burger);
+            StartCoroutine(LoadScene(2));
+        }
+
         EnemySpawner enemySpawner = EnemySpawner.instance;
         switch (PlayerPrefs.GetInt("currentLevel"))
         {
@@ -109,7 +123,14 @@ public class LevelManager : MonoBehaviour
             }
             else if (currentLevel > 0)
             {
-                StartCoroutine(LoadScene(1));
+                if (hasUnlock)
+                {
+                    StartCoroutine(LoadScene(2));
+                }
+                else
+                {
+                    StartCoroutine(LoadScene(1));
+                }
             }
         }
     }
@@ -153,7 +174,7 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("unlockedCabbitsu", 1);
         }
 
-        if(usedOnlyTommyTina)
+        if (usedOnlyTommyTina)
         {
             PlayerPrefs.SetInt("earnedLaTomatina", 1);
         }
@@ -178,21 +199,46 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
             case 2:
-                PlayerPrefs.SetInt("unlockedTina", 1);
+                if (!PlayerPrefs.HasKey("unlockedTina"))
+                {
+                    PlayerPrefs.SetInt("unlockedTina", 1);
+                    hasUnlock = true;
+                    unlockList.Enqueue(Constants.Towers.Turnip);
+                }
                 break;
             case 3:
-                PlayerPrefs.SetInt("unlockedGary", 1);
+                if (!PlayerPrefs.HasKey("unlockedGary"))
+                {
+                    PlayerPrefs.SetInt("unlockedGary", 1);
+                    hasUnlock = true;
+                    unlockList.Enqueue(Constants.Towers.Garlic);
+                }
                 break;
             case 4:
-                PlayerPrefs.SetInt("unlockedSteve", 1);
+                if (!PlayerPrefs.HasKey("unlockedSteve"))
+                {
+                    PlayerPrefs.SetInt("unlockedSteve", 1);
+                    unlockList.Enqueue(Constants.Enemies.Doughnut);
+                }
+                hasUnlock = true;
                 break;
             case 5:
-                PlayerPrefs.SetInt("unlockedTommy", 1);
-                PlayerPrefs.SetInt("earnedGettingYourGreens", 1);
+                if (!PlayerPrefs.HasKey("unlockedTommy"))
+                {
+                    PlayerPrefs.SetInt("unlockedTommy", 1);
+                    PlayerPrefs.SetInt("earnedGettingYourGreens", 1);
+                    hasUnlock = true;
+                    unlockList.Enqueue(Constants.Towers.Tomato);
+                }
                 break;
             case 6:
-                PlayerPrefs.SetInt("unlockedIda", 1);
-                PlayerPrefs.SetInt("earnedTheDevilsYouKnow", 1);
+                if (!PlayerPrefs.HasKey("unlockedIda"))
+                {
+                    PlayerPrefs.SetInt("unlockedIda", 1);
+                    PlayerPrefs.SetInt("earnedTheDevilsYouKnow", 1);
+                    hasUnlock = true;
+                    unlockList.Enqueue(Constants.Enemies.IceCream);
+                }
                 break;
         }
     }

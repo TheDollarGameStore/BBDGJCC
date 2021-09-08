@@ -95,7 +95,10 @@ public class ITower : MonoBehaviour
     {
         CancelInvoke("Unfreeze");
         frozen = true;
-        anim.speed = 0.5f;
+        if (anim != null)
+        {
+            anim.speed = 0.5f;
+        }
         Invoke("Unfreeze", 2f);
     }
 

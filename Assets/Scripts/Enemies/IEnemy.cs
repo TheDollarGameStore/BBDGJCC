@@ -200,9 +200,20 @@ public class IEnemy : MonoBehaviour
 
             if(currentDamage > damage)
             {
+                if (anim.GetBool("isAttacking") == false)
+                {
+                    anim.SetBool("isAttacking", true);
+                }
                 targetTile.tower.TakeDamage(damage);
                 wobbler.DoTheWobble();
                 currentDamage = 0;
+            }
+        }
+        else
+        {
+            if (anim.GetBool("isAttacking") == true)
+            {
+                anim.SetBool("isAttacking", false);
             }
         }
     }

@@ -82,6 +82,8 @@ public class MainMenuScript : MonoBehaviour
         }
         currentLevel = unlockedLevel;
         UpdateLevelGameObjects();
+        previousLevelButton.enabled = false;
+        previousLevelButton.enabled = true;
         if (PlayerPrefs.HasKey("unlockedCabbitsu"))
         {
             endlessButton.interactable = true;

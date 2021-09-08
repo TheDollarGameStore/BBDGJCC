@@ -52,10 +52,16 @@ public class ITower : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        sr.color = Constants.damage;
-        foreach (SpriteRenderer sri in srs)
+        if (sr != null)
         {
-            sri.color = Constants.damage;
+            sr.color = Constants.damage;
+        }
+        if (srs != null)
+        {
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Constants.damage;
+            }
         }
         hpBar.fillAmount = (float)hp / maxHp;
 

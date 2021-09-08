@@ -1717,7 +1717,7 @@ MonoBehaviour:
   remainingEnemies: []
   endlessEnemyBaseAmt: 10
   endlessEnemyIncreaseAmt: 5
-  endlessGroupSizeMultiplier: 3
+  endlessGroupSizeMultiplier: 2
   level1: 000000000000000000000000000000000000000000000000
   level2: 000000000000000000000000000000000000000000000000
   level3: 000000000100000000000000010000000000000001000000

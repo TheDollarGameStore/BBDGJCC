@@ -8,6 +8,9 @@ public class IProjectile : MonoBehaviour
     public int speed;
     public float lifetime;
     public float ccTimer;
+    public bool splashDamage;
+
+    private bool dealtDamage = false;
 
     private void Start()
     {
@@ -24,5 +27,25 @@ public class IProjectile : MonoBehaviour
     private void Despawn()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((!dealtDamage || splashDamage) && collision.gameObject.CompareTag("Enemy"))
+        {
+            dealtDamage = true;
+            IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
+            if (ccTimer != 0)
+            {
+                enemy.Freeze(ccTimer);
+            }
+
+            enemy.TakeDamage(damage);
+
+            if (speed != 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

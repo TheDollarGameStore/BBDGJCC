@@ -71,7 +71,7 @@ public class IEnemy : MonoBehaviour
         }
     }
 
-    private void PlayRandomize()
+    public void PlayRandomize()
     {
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.Play();
@@ -123,38 +123,6 @@ public class IEnemy : MonoBehaviour
             foreach (SpriteRenderer sri in srs)
             {
                 sri.color = Color.Lerp(sr.color, Constants.white, 5f * Time.deltaTime);
-            }
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            PlayRandomize();
-            sr.color = Constants.damage;
-            foreach (SpriteRenderer sri in srs)
-            {
-                sri.color = Constants.damage;
-            }
-            IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
-
-            health -= projectile.damage;
-
-            if (projectile.ccTimer != 0)
-            {
-                Freeze(projectile.ccTimer);
-            }
-
-            if (projectile.speed != 0)
-            {
-                Destroy(collision.gameObject);
-            }
-
-            if (health <= 0)
-            {
-                LevelManager.instance.remainingEnemies.Remove(gameObject);
-                Destroy(gameObject);
             }
         }
     }
@@ -215,6 +183,24 @@ public class IEnemy : MonoBehaviour
             {
                 anim.SetBool("isAttacking", false);
             }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        PlayRandomize();
+        sr.color = Constants.damage;
+        foreach (SpriteRenderer sri in srs)
+        {
+            sri.color = Constants.damage;
+        }
+
+        health -= damage;
+
+        if (health <= 0)
+        {
+            LevelManager.instance.remainingEnemies.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 }

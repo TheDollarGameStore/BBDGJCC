@@ -33,6 +33,7 @@ public class LevelMenuScript : MonoBehaviour
     {
         hudGameObject.SetActive(!hudGameObject.activeSelf);
         pauseMenuGameObject.SetActive(!pauseMenuGameObject.activeSelf);
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
 
     private IEnumerator LoadScene(int sceneBuildIndex)

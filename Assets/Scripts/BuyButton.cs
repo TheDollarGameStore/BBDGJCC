@@ -14,6 +14,19 @@ public class BuyButton : MonoBehaviour
         price = Constants.GetTowerPrice(towerType);
 
         priceText.text = price.ToString();
+
+        switch(towerType)
+        {
+            case Constants.Towers.Garlic:
+                gameObject.SetActive(PlayerPrefs.HasKey("unlockedGary"));
+                break;
+            case Constants.Towers.Tomato:
+                gameObject.SetActive(PlayerPrefs.HasKey("unlockedTommy"));
+                break;
+            case Constants.Towers.Turnip:
+                gameObject.SetActive(PlayerPrefs.HasKey("unlockedTina"));
+                break;
+        }
     }
 
     // Update is called once per frame

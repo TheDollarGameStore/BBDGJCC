@@ -104,6 +104,8 @@ public class IEnemy : MonoBehaviour
         {
             GridTile gridTile = GridManager.instance.tiles[row, 0];
             transform.position = gridTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f);
+
+            LevelMenuScript.instance.EndGame(false);
         }
     }
 

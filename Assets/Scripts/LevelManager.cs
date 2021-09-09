@@ -16,9 +16,10 @@ public class LevelManager : MonoBehaviour
     public bool usedOnlyTommyTina = true;
     [HideInInspector]
     public Queue<Enum> unlockList = new Queue<Enum>();
+    [HideInInspector]
+    public bool hasUnlock = false;
 
     private bool levelComplete = false;
-    private bool hasUnlock = false;
 
 
     public int endlessEnemyBaseAmt;
@@ -45,6 +46,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         int currentLevel = PlayerPrefs.GetInt("currentLevel");
 
         if(currentLevel > 0)
@@ -107,6 +109,7 @@ public class LevelManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("currentLevel", ++currentLevel);
                 levelComplete = true;
+                LevelMenuScript.instance.EndGame(levelComplete);
             }
             else
             {
@@ -124,25 +127,7 @@ public class LevelManager : MonoBehaviour
 
                 enemySpawner.StartSpawner();
             }
-
             HandleAchievements(currentLevel, endlessLevel);
-
-            if (currentLevel > Constants.maxLevel)
-            {
-                PlayerPrefs.SetInt("currentLevel", 1);
-                StartCoroutine(LoadScene(0));
-            }
-            else if (currentLevel > 0)
-            {
-                if (hasUnlock)
-                {
-                    StartCoroutine(LoadScene(2));
-                }
-                else
-                {
-                    StartCoroutine(LoadScene(1));
-                }
-            }
         }
     }
 

@@ -1,63 +1,91 @@
 // https://www.graphreader.com/plotter
 
-let currentDiscipline = 500;
+const COOLDOWN = {
+  COIN: 10000,
+  GARLIC: 0,
+  TOMATO: 0,
+  TURNIP: 0,
+  BROCCOLI: 0
+};
+
+const DELTA_DISCIPLINE = {
+  COIN: 25,
+  TURNIP: -50,
+  TOMATO: -150,
+  GARLIC: -200,
+  BROCCOLI: -100
+};
+
+let currentDiscipline;
 const eventList = [];
 
-const COIN_COUNT = 10;
-const COIN_MILLISECONDS = 10000;
-const COIN_DELTA_DISCIPLINE = 25;
-const COIN_MILLISECONDS_OFFSET = 10000;
-
-const GARLIC_COUNT = 0;
-const GARLIC_MILLISECONDS = 0;
-const GARLIC_DELTA_DISCIPLINE = 0;
-const GARLIC_MILLISECONDS_OFFSET = 0;
-
-const TOMATO_COUNT = 0;
-const TOMATO_MILLISECONDS = 0;
-const TOMATO_DELTA_DISCIPLINE = 0;
-const TOMATO_MILLISECONDS_OFFSET = 0;
-
-const TURNIP_COUNT = 4;
-const TURNIP_MILLISECONDS = 500;
-const TURNIP_DELTA_DISCIPLINE = -50;
-const TURNIP_MILLISECONDS_OFFSET = 0;
-
-const BROCCOLI_COUNT = 6;
-const BROCCOLI_MILLISECONDS = 4000;
-const BROCCOLI_DELTA_DISCIPLINE = -100;
-const BROCCOLI_MILLISECONDS_OFFSET = 12000;
-
-function initializeTurnips() {
-  for (let turnipCount = 0; turnipCount < TURNIP_COUNT; turnipCount++) {
-    const turnipMilliseconds = turnipCount * TURNIP_MILLISECONDS + TURNIP_MILLISECONDS_OFFSET;
+function initializeTowersLinear(name, count, millisecondsBefore, millisecondsBetween) {
+  if (millisecondsBetween < COOLDOWN[name]) {
+    console.log(`${name} NOT YET OFF COOLDOWN`);
+  }
+  for (let index = 0; index < count; index++) {
+    const milliseconds = millisecondsBefore + millisecondsBetween * index;
     eventList.push({
-      milliseconds: turnipMilliseconds,
-      deltaDiscipline: TURNIP_DELTA_DISCIPLINE
+      milliseconds,
+      deltaDiscipline: DELTA_DISCIPLINE[name]
     });
-    for (let coinCount = 0; coinCount < COIN_COUNT; coinCount++) {
-      eventList.push({
-        milliseconds: coinCount * COIN_MILLISECONDS + COIN_MILLISECONDS_OFFSET + turnipMilliseconds,
-        deltaDiscipline: COIN_DELTA_DISCIPLINE
-      });
+    if (name === 'TURNIP') {
+      for (let coinIndex = 1; coinIndex <= 12; coinIndex++) {
+        eventList.push({
+          milliseconds: milliseconds + COOLDOWN.COIN * coinIndex,
+          deltaDiscipline: DELTA_DISCIPLINE.COIN
+        });
+      }
     }
   }
 }
 
-function initializeTowersLinear(TOWER_COUNT, TOWER_MILLISECONDS, TOWER_DELTA_DISCIPLINE, TOWER_MILLISECONDS_OFFSET) {
-  for (let towerCount = 0; towerCount < TOWER_COUNT; towerCount++) {
-    eventList.push({
-      milliseconds: towerCount * TOWER_MILLISECONDS + TOWER_MILLISECONDS_OFFSET,
-      deltaDiscipline: TOWER_DELTA_DISCIPLINE
-    });
-  }
+function initializeLevel1() {
+  currentDiscipline = 1200; // the cost of 12 towers at the time of writing
+  initializeTowersLinear(
+    name = 'BROCCOLI',
+    count = 12, // two times the number of lanes means hopefully at least one tower per lane
+    millisecondsBefore = 10000, // allow the player to look around the screen a bit and figure out what to do
+    millisecondsBetween = 5000 // allow the player to become dextrous and capable over time
+  );
 }
 
-function plotDisciplineOverTime() {
-  initializeTurnips();
-  initializeTowersLinear(GARLIC_COUNT, GARLIC_MILLISECONDS, GARLIC_DELTA_DISCIPLINE, GARLIC_MILLISECONDS_OFFSET);
-  initializeTowersLinear(TOMATO_COUNT, TOMATO_MILLISECONDS, TOMATO_DELTA_DISCIPLINE, TOMATO_MILLISECONDS_OFFSET);
-  initializeTowersLinear(BROCCOLI_COUNT, BROCCOLI_MILLISECONDS, BROCCOLI_DELTA_DISCIPLINE, BROCCOLI_MILLISECONDS_OFFSET);
+function initializeLevel2() { }
+
+function initializeLevel3() { }
+
+function initializeLevel4() { }
+
+function initializeLevel5() { }
+
+function initializeLevel6() { }
+
+function initializeEndless(level) { }
+
+function plotDisciplineOverTime(level) {
+  switch (level) {
+    case 1:
+      initializeLevel1();
+      break;
+    case 2:
+      initializeLevel2();
+      break;
+    case 3:
+      initializeLevel3();
+      break;
+    case 4:
+      initializeLevel4();
+      break;
+    case 5:
+      initializeLevel5();
+      break;
+    case 6:
+      initializeLevel6();
+      break;
+    default:
+      initializeEndless(level);
+      break;
+  }
   let xList = [0];
   let yList = [currentDiscipline];
   eventList.sort((a, b) => a.milliseconds - b.milliseconds);
@@ -70,4 +98,4 @@ function plotDisciplineOverTime() {
   return `{x:[${xList.join(',')}],y:[${yList.join(',')}]}`;
 }
 
-console.log(plotDisciplineOverTime());
+console.log(plotDisciplineOverTime(parseInt(process.argv[2])));

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public int endlessEnemyBaseAmt;
     public int endlessEnemyIncreaseAmt;
     public int endlessGroupSizeMultiplier;
+    public TextMeshProUGUI levelText;
 
     public Constants.Enemies[] level1;
     public Constants.Enemies[] level2;
@@ -43,6 +45,12 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int currentLevel = PlayerPrefs.GetInt("currentLevel");
+
+        if(currentLevel > 0)
+        {
+            levelText.text = "Level " + currentLevel;
+        }
 
         if (!PlayerPrefs.HasKey("unlockedPatrick"))
         {
@@ -54,10 +62,11 @@ public class LevelManager : MonoBehaviour
         }
 
         EnemySpawner enemySpawner = EnemySpawner.instance;
-        switch (PlayerPrefs.GetInt("currentLevel"))
+        switch (currentLevel)
         {
             case -1:
                 PlayerPrefs.SetInt("endlessLevel", 0);
+                levelText.text = "Endless " + (PlayerPrefs.GetInt("endlessLevel") + 1);
                 enemySpawner.enemyList = GenerateEndlessModeList();
                 break;
             case 1:
@@ -102,6 +111,8 @@ public class LevelManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetInt("endlessLevel", ++endlessLevel);
+
+                levelText.text = "Endless " + (PlayerPrefs.GetInt("endlessLevel") + 1);
 
                 EnemySpawner enemySpawner = EnemySpawner.instance;
                 enemySpawner.enemyList = GenerateEndlessModeList();

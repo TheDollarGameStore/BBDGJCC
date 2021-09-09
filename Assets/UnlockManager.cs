@@ -95,7 +95,7 @@ public class UnlockManager : MonoBehaviour
             Instantiate(unlockPrefab, new Vector3(375, 80, 0), Quaternion.identity);
         }
 
-        Invoke("LoadNextScene", 10f);
+        Invoke("LoadNextScene", 8f);
     }
 
     void LoadNextScene()

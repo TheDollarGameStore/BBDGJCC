@@ -14,9 +14,12 @@ public class LevelMenuScript : MonoBehaviour
     public GameObject hudGameObject;
     public GameObject pauseMenuGameObject;
     public GameObject endMenu;
+    public GameObject confirmMenu;
 
     private AudioSource[] audioSources;
     private string nextScreen;
+    private string previousScreen;
+    private bool gameOver = false;
 
     private void Awake()
     {
@@ -89,7 +92,7 @@ public class LevelMenuScript : MonoBehaviour
 
     public void EndGame(bool levelComplete)
     {
-        if (!endMenu.activeSelf)
+        if (!endMenu.activeSelf && !gameOver)
         {
             string endlessText = "";
 
@@ -115,25 +118,71 @@ public class LevelMenuScript : MonoBehaviour
             }
             hudGameObject.SetActive(false);
             endMenu.SetActive(true);
+            pauseMenuGameObject.SetActive(false);
+            gameOver = true;
         }
     }
 
-    public void SetNextScreen(string nextScreen)
+    public void SetScreen(string screens)
     {
         ButtonSounds.instance.PlayClick();
-        this.nextScreen = nextScreen;
+        string[] screenArray = screens.Split(';');
+        this.nextScreen = screenArray[0];
+        this.previousScreen = screenArray[1];
+
+        switch(nextScreen)
+        {
+            case "QUIT":
+                hudGameObject.SetActive(false);
+                endMenu.SetActive(false);
+                confirmMenu.SetActive(true);
+                pauseMenuGameObject.SetActive(false);
+                break;
+            case "MAINMENU":
+                hudGameObject.SetActive(false);
+                endMenu.SetActive(false);
+                confirmMenu.SetActive(true);
+                pauseMenuGameObject.SetActive(false);
+                break;
+        }
     }
 
     public void GoToNextScreen()
     {
+        ButtonSounds.instance.PlayClick();
         Time.timeScale = 1;
-        if (nextScreen.Equals("QUIT"))
+
+        switch (nextScreen)
         {
-            QuitGame();
+            case "QUIT":
+                QuitGame();
+                confirmMenu.SetActive(false);
+                break;
+            case "MAINMENU":
+                MainMenu();
+                confirmMenu.SetActive(false);
+                break;
         }
-        else
+    }
+
+    public void GoToPreviousScreen()
+    {
+        ButtonSounds.instance.PlayClick();
+        switch (previousScreen)
         {
-            MainMenu();
+            case "PAUSE":
+                hudGameObject.SetActive(false);
+                endMenu.SetActive(false);
+                confirmMenu.SetActive(false);
+                pauseMenuGameObject.SetActive(true);
+                break;
+            case "END":
+                hudGameObject.SetActive(false);
+                endMenu.SetActive(true);
+                confirmMenu.SetActive(false);
+                pauseMenuGameObject.SetActive(false);
+                break;
         }
+
     }
 }

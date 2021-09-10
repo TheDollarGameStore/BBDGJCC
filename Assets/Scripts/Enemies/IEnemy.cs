@@ -172,4 +172,36 @@ public class IEnemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            PlayRandomize();
+            sr.color = Constants.damage;
+            foreach (SpriteRenderer sri in srs)
+            {
+                sri.color = Constants.damage;
+            }
+            IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
+
+            health -= projectile.damage;
+
+            if (projectile.ccTimer != 0)
+            {
+                Freeze(projectile.ccTimer);
+            }
+
+            if (projectile.speed != 0)
+            {
+                Destroy(collision.gameObject);
+            }
+
+            if (health <= 0)
+            {
+                LevelManager.instance.remainingEnemies.Remove(gameObject);
+                Destroy(gameObject);
+            }
+        }
+    }
 }

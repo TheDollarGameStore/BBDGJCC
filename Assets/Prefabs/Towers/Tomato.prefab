@@ -987,5 +987,5 @@ MonoBehaviour:
   shooter: 0
   soundObject: {fileID: 1723610749016711046, guid: 07ac847de74b58748ae1d71418376248, type: 3}
   windUpSpeed: 1
-  maxWind: 2.26
+  maxWind: 1.55
   screenShake: {fileID: 6317242806447844036, guid: 98bed9ed891f7fb42af426dfb7f56523, type: 3}

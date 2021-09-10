@@ -1,7 +1,7 @@
 // https://www.graphreader.com/plotter
 
 const COOLDOWN = {
-  COIN: 10000,
+  COIN: 7500,
   GARLIC: 0,
   TOMATO: 0,
   TURNIP: 0,
@@ -41,16 +41,48 @@ function initializeTowersLinear(name, count, millisecondsBefore, millisecondsBet
 }
 
 function initializeLevel1() {
-  currentDiscipline = 1200; // the cost of 12 towers at the time of writing
+  currentDiscipline = 1000; // the cost of 10 broccolies at the time of writing
   initializeTowersLinear(
     name = 'BROCCOLI',
-    count = 12, // two times the number of lanes means hopefully at least one tower per lane
-    millisecondsBefore = 10000, // allow the player to look around the screen a bit and figure out what to do
-    millisecondsBetween = 5000 // allow the player to become dextrous and capable over time
+    count = 10, // 4 broccolies are needed to defeat 4 burgers, allow 6 errors
+    millisecondsBefore = 5000, // allow the player to look around the screen a bit and figure out what to do
+    millisecondsBetween = 2000 // allow the player to become dextrous and capable over time
   );
 }
 
-function initializeLevel2() { }
+function initializeLevel2() {
+  currentDiscipline = 500; // the cost of 4 turnips and 3 broccolies at the time of writing
+  initializeTowersLinear(
+    name = 'TURNIP',
+    count = 4, // 4 are needed as initial turnips
+    millisecondsBefore = 2000, // the player should be able to respond faster than before
+    millisecondsBetween = 1000 // the player should be able to respond faster than before
+  );
+  initializeTowersLinear(
+    name = 'BROCCOLI',
+    count = 6, // at worst, 1 enemy spawns across every lane, over the time it takes to afford 6 broccolies
+    millisecondsBefore = 6000, // allow the player to place turnips before spawning initial enemies
+    millisecondsBetween = 6000 // allow the player to observe spawn lane before placement
+  );
+  initializeTowersLinear(
+    name = 'TURNIP',
+    count = 3,
+    millisecondsBefore = 13000, // time before turnips can be afforded
+    millisecondsBetween = 2000  // time before turnips can be afforded
+  );
+  initializeTowersLinear(
+    name = 'TURNIP',
+    count = 5, // fill up second column with turnips
+    millisecondsBefore = 33000, // time before turnips can be afforded
+    millisecondsBetween = 4000  // time before turnips can be afforded
+  );
+  initializeTowersLinear(
+    name = 'BROCCOLI',
+    count = 6, // increase enemy spawns to require 2 broccolies per lane
+    millisecondsBefore = 42000, // time before broccolies can be afforded
+    millisecondsBetween = 5000 // allow the player to observe spawn lane before placement
+  );
+}
 
 function initializeLevel3() { }
 

@@ -108,41 +108,48 @@ public class MainMenuScript : MonoBehaviour
 
     public void QuitGame()
     {
+        ButtonSounds.instance.PlayClick();
         Application.Quit();
     }
 
     public void NextLevel()
     {
+        ButtonSounds.instance.PlayClick();
         currentLevel++;
         UpdateLevelGameObjects();
     }
 
     public void PlayLevel()
     {
+        ButtonSounds.instance.PlayClick();
         PlayerPrefs.SetInt("currentLevel", currentLevel);
         Transitioner.instance.FadeIn(1);
     }
 
     public void PlayEndless()
     {
+        ButtonSounds.instance.PlayClick();
         PlayerPrefs.SetInt("currentLevel", -1);
         Transitioner.instance.FadeIn(1);
     }
 
     public void ResetAndQuit()
     {
+        ButtonSounds.instance.PlayClick();
         PlayerPrefs.DeleteAll();
         QuitGame();
     }
 
     public void PreviousLevel()
     {
+        ButtonSounds.instance.PlayClick();
         currentLevel--;
         UpdateLevelGameObjects();
     }
 
     public void SelectCharacter(int index)
     {
+        ButtonSounds.instance.PlayClick();
         Button button = characterButtonList[index];
         button.Select();
         selectedCharacterText.text = characterTextList[index];
@@ -152,6 +159,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void SelectAchievement(int index)
     {
+        ButtonSounds.instance.PlayClick();
         Button button = achievementButtonList[index];
         button.Select();
         selectedAchievementText.text = achievementTextList[index];

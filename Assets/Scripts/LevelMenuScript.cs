@@ -33,16 +33,19 @@ public class LevelMenuScript : MonoBehaviour
 
     public void MainMenu()
     {
+        ButtonSounds.instance.PlayClick();
         Transitioner.instance.FadeIn(0);
     }
 
     public void QuitGame()
     {
+        ButtonSounds.instance.PlayClick();
         Application.Quit();
     }
 
     public void TogglePause()
     {
+        ButtonSounds.instance.PlayClick();
         hudGameObject.SetActive(!hudGameObject.activeSelf);
         pauseMenuGameObject.SetActive(!pauseMenuGameObject.activeSelf);
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
@@ -50,6 +53,7 @@ public class LevelMenuScript : MonoBehaviour
 
     public void ContinueRetry()
     {
+        ButtonSounds.instance.PlayClick();
         Time.timeScale = 1;
         int currentLevel = PlayerPrefs.GetInt("currentLevel");
 

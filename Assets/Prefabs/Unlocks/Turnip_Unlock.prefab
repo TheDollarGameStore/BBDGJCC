@@ -243,10 +243,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tina
+  m_text: 'Tina Turnip
 
 
-    Did someone ask for a pick me up?'
+    Tina can be placed to generate discipline coins over
+    time. Simply click on the coins to collect them!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
   m_sharedMaterial: {fileID: 1224682957843833285, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
@@ -273,7 +274,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75.5
+  m_fontSize: 50.2
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

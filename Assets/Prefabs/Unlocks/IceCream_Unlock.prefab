@@ -572,10 +572,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ida
+  m_text: 'Ice cold Ida
 
 
-    If I can''t be happy, neither can YOU!'
+    Ida will slow your towers upon touch, which can be
+    a real menace! Use a Tommy to instantly take her off of the battlefield!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
   m_sharedMaterial: {fileID: 1224682957843833285, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
@@ -602,7 +603,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.05
+  m_fontSize: 43.05
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

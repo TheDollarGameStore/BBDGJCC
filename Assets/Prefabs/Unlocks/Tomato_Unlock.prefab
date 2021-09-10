@@ -698,7 +698,8 @@ MonoBehaviour:
   m_text: 'Tommy
 
 
-    I''m so mad I could just about... JUST ABOUT...'
+    Tommy can be placed to instantly kill all adjacent and diagonal
+    enemies. Useful when you''re in a pinch!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
   m_sharedMaterial: {fileID: 1224682957843833285, guid: 4967ac18184e41046a1e9940511d31b3, type: 2}
@@ -725,7 +726,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.8
+  m_fontSize: 47.9
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

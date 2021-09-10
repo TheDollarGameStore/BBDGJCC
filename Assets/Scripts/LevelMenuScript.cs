@@ -16,6 +16,7 @@ public class LevelMenuScript : MonoBehaviour
     public GameObject endMenu;
 
     private AudioSource[] audioSources;
+    private string nextScreen;
 
     private void Awake()
     {
@@ -102,6 +103,25 @@ public class LevelMenuScript : MonoBehaviour
             }
             hudGameObject.SetActive(false);
             endMenu.SetActive(true);
+        }
+    }
+
+    public void SetNextScreen(string nextScreen)
+    {
+        ButtonSounds.instance.PlayClick();
+        this.nextScreen = nextScreen;
+    }
+
+    public void GoToNextScreen()
+    {
+        Time.timeScale = 1;
+        if (nextScreen.Equals("QUIT"))
+        {
+            QuitGame();
+        }
+        else
+        {
+            MainMenu();
         }
     }
 }

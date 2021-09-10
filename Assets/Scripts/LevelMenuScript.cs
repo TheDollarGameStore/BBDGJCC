@@ -15,12 +15,19 @@ public class LevelMenuScript : MonoBehaviour
     public GameObject pauseMenuGameObject;
     public GameObject endMenu;
 
+    private AudioSource[] audioSources;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        audioSources = GetComponents<AudioSource>();
     }
 
     public void OnCancel(InputAction.CallbackContext context)
@@ -77,21 +84,24 @@ public class LevelMenuScript : MonoBehaviour
 
     public void EndGame(bool levelComplete)
     {
-        Time.timeScale = 0;
-
-        if (levelComplete)
+        if (!endMenu.activeSelf)
         {
-            endMenu.transform.GetChild(1).gameObject.SetActive(false); //Sad Cabbitsu
-            endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "CONGRATULATIONS!";
-            endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "CONTINUE";
+            if (levelComplete)
+            {
+                endMenu.transform.GetChild(1).gameObject.SetActive(false); //Sad Cabbitsu
+                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "CONGRATULATIONS!";
+                endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "CONTINUE";
+                audioSources[0].Play();
+            }
+            else
+            {
+                endMenu.transform.GetChild(0).gameObject.SetActive(false); //Happy Cabbitsu
+                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "GAME OVER";
+                endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "RETRY";
+                audioSources[1].Play();
+            }
+            hudGameObject.SetActive(false);
+            endMenu.SetActive(true);
         }
-        else
-        {
-            endMenu.transform.GetChild(0).gameObject.SetActive(false); //Happy Cabbitsu
-            endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "GAME OVER";
-            endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "RETRY";
-        }
-        hudGameObject.SetActive(false);
-        endMenu.SetActive(true);
     }
 }

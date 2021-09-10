@@ -30,7 +30,6 @@ public class MainMenuScript : MonoBehaviour
     public Button achievement7Button;
     public Button achievement8Button;
     public Button previousLevelButton;
-    public Slider loadingSlider;
     private string lockedText = "LOCKED";
     private string[] characterTextList = new string[8];
     private string[] achievementTextList = new string[8];

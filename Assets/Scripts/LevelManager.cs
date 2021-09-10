@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance = null;
 
     [HideInInspector]
-    public List<GameObject> remainingEnemies;
+    public List<GameObject> remainingEnemies = new List<GameObject>();
     [HideInInspector]
     public bool usedOnlyTommyTina = true;
     [HideInInspector]
@@ -19,20 +19,20 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public bool hasUnlock = false;
 
-    private bool levelComplete = false;
-
 
     public int endlessEnemyBaseAmt;
     public int endlessEnemyIncreaseAmt;
     public int endlessGroupSizeMultiplier;
+    public int endlessInitialWait;
+    public int endlessMinTimeBetweenSpawns;
+    public int endlessMaxTimeBetweenSpawns;
+
     public TextMeshProUGUI levelText;
 
-    public Constants.Enemies[] level1;
-    public Constants.Enemies[] level2;
-    public Constants.Enemies[] level3;
-    public Constants.Enemies[] level4;
-    public Constants.Enemies[] level5;
-    public Constants.Enemies[] level6;
+    private List<SpawningContainer> spawningList = new List<SpawningContainer>();
+    private int endlessGroupSpawnSize = 1;
+    private bool levelComplete = false;
+    private bool spawningComplete = false;
 
 
     private void Awake()
@@ -69,39 +69,43 @@ public class LevelManager : MonoBehaviour
             case -1:
                 PlayerPrefs.SetInt("endlessLevel", 0);
                 levelText.text = "Endless " + (PlayerPrefs.GetInt("endlessLevel") + 1);
-                enemySpawner.enemyList = GenerateEndlessModeList();
+                GenerateEndlessModeList();
                 break;
             case 1:
-                enemySpawner.enemyList = level1;
+                GenerateLevel1();
                 break;
             case 2:
-                enemySpawner.enemyList = level2;
+                GenerateLevel2();
                 break;
             case 3:
-                enemySpawner.enemyList = level3;
+                GenerateLevel3();
                 break;
             case 4:
-                enemySpawner.enemyList = level4;
+                GenerateLevel4();
                 break;
             case 5:
-                enemySpawner.enemyList = level5;
+                GenerateLevel5();
                 break;
             case 6:
-                enemySpawner.enemyList = level6;
+                GenerateLevel6();
                 break;
         }
 
+        PrepareSpawningList();
+        enemySpawner.enemyList = spawningList;
+
         Slider satisfactionSlider = GameManager.instance.satisfactionSlider.GetComponent<Slider>();
-        satisfactionSlider.maxValue = enemySpawner.enemyList.Length;
+        satisfactionSlider.maxValue = spawningList.Count;
         satisfactionSlider.value = 0;
 
         enemySpawner.StartSpawner();
+        spawningComplete = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (EnemySpawner.instance.enemyStack.Count == 0 && remainingEnemies.Count == 0 && !levelComplete)
+        if (spawningComplete && !levelComplete && EnemySpawner.instance.enemyQueue.Count == 0 && remainingEnemies.Count == 0 && EnemySpawner.instance.unspawnedEnemies == 0)
         {
             int currentLevel = PlayerPrefs.GetInt("currentLevel");
             int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
@@ -113,37 +117,49 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
+                spawningComplete = false;
                 PlayerPrefs.SetInt("endlessLevel", ++endlessLevel);
 
                 levelText.text = "Endless " + (PlayerPrefs.GetInt("endlessLevel") + 1);
 
                 EnemySpawner enemySpawner = EnemySpawner.instance;
-                enemySpawner.enemyList = GenerateEndlessModeList();
-                enemySpawner.endlessGroupSpawnSize = endlessLevel * endlessGroupSizeMultiplier;
+                endlessGroupSpawnSize = endlessLevel * endlessGroupSizeMultiplier;
+                GenerateEndlessModeList();
+                PrepareSpawningList();
+                enemySpawner.enemyList = spawningList;
 
                 Slider satisfactionSlider = GameManager.instance.satisfactionSlider.GetComponent<Slider>();
-                satisfactionSlider.maxValue = enemySpawner.enemyList.Length;
+                satisfactionSlider.maxValue = spawningList.Count;
                 satisfactionSlider.value = 0;
 
                 enemySpawner.StartSpawner();
+                spawningComplete = true;
             }
             HandleAchievements(currentLevel, endlessLevel);
         }
     }
 
-    private Constants.Enemies[] GenerateEndlessModeList()
+    private void GenerateEndlessModeList()
     {
         int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
         int enemyListSize = endlessEnemyBaseAmt + (endlessEnemyIncreaseAmt * endlessLevel);
-        Constants.Enemies[] enemyList = new Constants.Enemies[enemyListSize];
+        int counter = 0;
+        spawningList = new List<SpawningContainer>();
 
-        for (int i = 0; i < enemyListSize; i++)
+        while (enemyListSize > 0)
         {
+            int waitTime = endlessInitialWait + (counter * UnityEngine.Random.Range(endlessMinTimeBetweenSpawns, endlessMaxTimeBetweenSpawns));
 
-            enemyList[i] = (Constants.Enemies)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Constants.Enemies)).Length);
+            for (int i = 0; i < endlessGroupSpawnSize; i++)
+            {
+                if (enemyListSize > 0)
+                {
+                    spawningList.Add(new SpawningContainer((Constants.Enemies)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Constants.Enemies)).Length), waitTime));
+                    enemyListSize--;
+                }
+            }
+            counter++;
         }
-
-        return enemyList;
     }
 
     private void HandleAchievements(int currentLevel, int endlessLevel)
@@ -221,5 +237,60 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private void PrepareSpawningList()
+    {
+        int previousWaitTime = 0;
+
+        for (int i = 0; i < spawningList.Count; i++)
+        {
+            int waitTime = spawningList[i].waitTime;
+            spawningList[i].waitTime -= previousWaitTime;
+            previousWaitTime = waitTime;
+        }
+    }
+
+    private void addEnemy(Constants.Enemies enemyType, int enemyCount, int timeBefore, int timeBetween)
+    {
+        for(int i = 0; i < enemyCount; i++)
+        {
+            spawningList.Add(new SpawningContainer(enemyType, timeBefore + (i * timeBetween)));
+        }
+        spawningList.Sort();
+    }
+
+    private void GenerateLevel1()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 5, 3);
+    }
+
+    private void GenerateLevel2()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 5, 2);
+    }
+
+    private void GenerateLevel3()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
+    }
+
+    private void GenerateLevel4()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
+        addEnemy(Constants.Enemies.Doughnut, 6, 4, 4);
+    }
+
+    private void GenerateLevel5()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 5, 2);
+        addEnemy(Constants.Enemies.Doughnut, 6, 4, 3);
+    }
+
+    private void GenerateLevel6()
+    {
+        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
+        addEnemy(Constants.Enemies.Doughnut, 6, 5, 3);
+        addEnemy(Constants.Enemies.IceCream, 6, 6, 3);
     }
 }

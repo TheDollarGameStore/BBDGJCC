@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -75.0535, w: 0}
+  m_margin: {x: -76.33093, y: 0, z: 72.602875, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2955,11 +2955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3e81850f49c0447b252556c3a68215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyList: 000000000100000002000000000000000100000002000000
-  initialWait: 5
-  minTimeBetweenSpawns: 2
-  maxTimeBetweenSpawns: 4
-  endlessGroupSpawnSize: 1
 --- !u!4 &1084756796
 Transform:
   m_ObjectHideFlags: 0
@@ -3267,16 +3262,13 @@ MonoBehaviour:
   remainingEnemies: []
   usedOnlyTommyTina: 1
   hasUnlock: 0
-  endlessEnemyBaseAmt: 10
+  endlessEnemyBaseAmt: 1
   endlessEnemyIncreaseAmt: 5
   endlessGroupSizeMultiplier: 2
+  endlessInitialWait: 4
+  endlessMinTimeBetweenSpawns: 2
+  endlessMaxTimeBetweenSpawns: 4
   levelText: {fileID: 310627109}
-  level1: 00000000
-  level2: 00000000
-  level3: 000000000000000000000000000000000000000000000000
-  level4: 000000000100000000000000010000000000000001000000
-  level5: 010000000100000000000000010000000000000000000000
-  level6: 000000000100000002000000000000000100000002000000
 --- !u!4 &1216141920
 Transform:
   m_ObjectHideFlags: 0
@@ -4945,6 +4937,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: LevelMenuScript, Assembly-CSharp
         m_MethodName: TogglePause
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 884231510}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -81,12 +81,24 @@ public class LevelMenuScript : MonoBehaviour
                 Transitioner.instance.FadeIn(1);
             }
         }
+        else
+        {
+            Transitioner.instance.FadeIn(1);
+        }
     }
 
     public void EndGame(bool levelComplete)
     {
         if (!endMenu.activeSelf)
         {
+            string endlessText = "";
+
+            if(PlayerPrefs.GetInt("currentLevel") == -1)
+            {
+                int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
+                endlessText = "\r\nENDLESS " + (endlessLevel + 1);
+            }
+
             if (levelComplete)
             {
                 endMenu.transform.GetChild(1).gameObject.SetActive(false); //Sad Cabbitsu
@@ -97,7 +109,7 @@ public class LevelMenuScript : MonoBehaviour
             else
             {
                 endMenu.transform.GetChild(0).gameObject.SetActive(false); //Happy Cabbitsu
-                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "GAME OVER";
+                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "GAME OVER" + endlessText;
                 endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "RETRY";
                 audioSources[1].Play();
             }

@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("unlockedPatrick", 1);
             unlockList.Enqueue(Constants.Towers.Brocolli);
             unlockList.Enqueue(Constants.Enemies.Burger);
-            StartCoroutine(LoadScene(2));
+            SceneManager.LoadScene(2);
         }
 
         EnemySpawner enemySpawner = EnemySpawner.instance;
@@ -129,22 +129,6 @@ public class LevelManager : MonoBehaviour
             }
             HandleAchievements(currentLevel, endlessLevel);
         }
-    }
-
-    private IEnumerator LoadScene(int sceneIndex)
-    {
-        yield return null;
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
-        asyncOperation.allowSceneActivation = false;
-        while (!asyncOperation.isDone)
-        {
-            if (asyncOperation.progress == 0.9f)
-            {
-                asyncOperation.allowSceneActivation = true;
-            }
-            yield return null;
-        }
-        levelComplete = false;
     }
 
     private Constants.Enemies[] GenerateEndlessModeList()

@@ -100,28 +100,14 @@ public class UnlockManager : MonoBehaviour
 
     void LoadNextScene()
     {
+        
         if (LevelManager.instance.unlockList.Count != 0)
         {
-            StartCoroutine(LoadScene(2));
+            Transitioner.instance.FadeIn(2);
         }
         else
         {
-            StartCoroutine(LoadScene(1));
-        }
-    }
-
-    private IEnumerator LoadScene(int buildIndex)
-    {
-        yield return null;
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(buildIndex);
-        asyncOperation.allowSceneActivation = false;
-        while (!asyncOperation.isDone)
-        {
-            if (asyncOperation.progress == 0.9f)
-            {
-                asyncOperation.allowSceneActivation = true;
-            }
-            yield return null;
+            Transitioner.instance.FadeIn(1);
         }
     }
 }

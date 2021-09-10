@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Projectile
   - DisciplineCoin
+  - Transition
   layers:
   - Default
   - TransparentFX

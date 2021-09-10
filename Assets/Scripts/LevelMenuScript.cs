@@ -33,7 +33,7 @@ public class LevelMenuScript : MonoBehaviour
 
     public void MainMenu()
     {
-        StartCoroutine(LoadScene(0));
+        Transitioner.instance.FadeIn(0);
     }
 
     public void QuitGame()
@@ -56,34 +56,18 @@ public class LevelMenuScript : MonoBehaviour
         if (currentLevel > Constants.maxLevel)
         {
             PlayerPrefs.SetInt("currentLevel", 1);
-            StartCoroutine(LoadScene(0));
+            Transitioner.instance.FadeIn(0);
         }
         else if (currentLevel > 0)
         {
             if (LevelManager.instance.hasUnlock)
             {
-                StartCoroutine(LoadScene(2));
+                Transitioner.instance.FadeIn(2);
             }
             else
             {
-                StartCoroutine(LoadScene(1));
+                Transitioner.instance.FadeIn(1);
             }
-        }
-    }
-
-    private IEnumerator LoadScene(int sceneBuildIndex)
-    {
-        yield return null;
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneBuildIndex);
-        asyncOperation.allowSceneActivation = false;
-        while (!asyncOperation.isDone)
-        {
-            loadingSlider.value = asyncOperation.progress;
-            if (asyncOperation.progress == 0.9f)
-            {
-                asyncOperation.allowSceneActivation = true;
-            }
-            yield return null;
         }
     }
 

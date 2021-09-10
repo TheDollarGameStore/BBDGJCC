@@ -120,13 +120,13 @@ public class MainMenuScript : MonoBehaviour
     public void PlayLevel()
     {
         PlayerPrefs.SetInt("currentLevel", currentLevel);
-        StartCoroutine(LoadScene(1));
+        Transitioner.instance.FadeIn(1);
     }
 
     public void PlayEndless()
     {
         PlayerPrefs.SetInt("currentLevel", -1);
-        StartCoroutine(LoadScene(1));
+        Transitioner.instance.FadeIn(1);
     }
 
     public void ResetAndQuit()
@@ -178,21 +178,5 @@ public class MainMenuScript : MonoBehaviour
         currentLevelText.text = "LEVEL " + currentLevel;
         nextLevelButton.interactable = currentLevel != unlockedLevel;
         previousLevelButton.interactable = currentLevel != 1;
-    }
-
-    private IEnumerator LoadScene(int sceneBuildIndex)
-    {
-        yield return null;
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneBuildIndex);
-        asyncOperation.allowSceneActivation = false;
-        while (!asyncOperation.isDone)
-        {
-            loadingSlider.value = asyncOperation.progress;
-            if (asyncOperation.progress == 0.9f)
-            {
-                asyncOperation.allowSceneActivation = true;
-            }
-            yield return null;
-        }
     }
 }

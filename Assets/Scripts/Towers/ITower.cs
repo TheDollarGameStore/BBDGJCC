@@ -113,7 +113,7 @@ public class ITower : MonoBehaviour
         
         PlayRandomize();
 
-        Instantiate(projectile, transform.position + new Vector3(0, 0, -9), Quaternion.identity);
+        Instantiate(projectile, transform.position + new Vector3(0, 0, 9), Quaternion.identity);
         if (shooter)
         {
             wobbler.DoTheWobble();

@@ -11,6 +11,7 @@ public class DisciplineCoin : MonoBehaviour
 
     private void Start()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, -9);
         audioSource = GetComponent<AudioSource>();
     }
 

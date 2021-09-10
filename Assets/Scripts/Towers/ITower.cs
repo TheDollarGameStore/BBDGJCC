@@ -28,6 +28,8 @@ public class ITower : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool placed = false;
+
 
 
     public void Init()
@@ -47,27 +49,31 @@ public class ITower : MonoBehaviour
             Invoke("Shoot", cooldown);
         }
         audioSource = GetComponent<AudioSource>();
+        placed = true;
     }
 
     public void TakeDamage(int damage)
     {
-        hp -= damage;
-        if (sr != null)
+        if (placed)
         {
-            sr.color = Constants.damage;
-        }
-        if (srs != null)
-        {
-            foreach (SpriteRenderer sri in srs)
+            hp -= damage;
+            if (sr != null)
             {
-                sri.color = Constants.damage;
+                sr.color = Constants.damage;
             }
-        }
-        hpBar.fillAmount = (float)hp / maxHp;
+            if (srs != null)
+            {
+                foreach (SpriteRenderer sri in srs)
+                {
+                    sri.color = Constants.damage;
+                }
+            }
+            hpBar.fillAmount = (float)hp / maxHp;
 
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

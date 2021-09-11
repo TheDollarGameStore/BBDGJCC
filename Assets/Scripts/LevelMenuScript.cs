@@ -45,13 +45,29 @@ public class LevelMenuScript : MonoBehaviour
     public void MainMenu()
     {
         ButtonSounds.instance.PlayClick();
-        Transitioner.instance.FadeIn(0);
+        if (LevelManager.instance.hasUnlock)
+        {
+            PlayerPrefs.SetInt("ActionAfterUnlock", 1); //1 = go to main menu
+            Transitioner.instance.FadeIn(2);
+        }
+        else
+        {
+            Transitioner.instance.FadeIn(0);
+        }
     }
 
     public void QuitGame()
     {
         ButtonSounds.instance.PlayClick();
-        Application.Quit();
+        if (LevelManager.instance.hasUnlock)
+        {
+            PlayerPrefs.SetInt("ActionAfterUnlock", 2); //2 = quit game
+            Transitioner.instance.FadeIn(2);
+        }
+        else
+        {
+            Application.Quit();
+        }
     }
 
     public void TogglePause()
@@ -163,11 +179,11 @@ public class LevelMenuScript : MonoBehaviour
         switch (nextScreen)
         {
             case "QUIT":
-                QuitGame();
+                QuitGame(); //lol
                 confirmMenu.SetActive(false);
                 break;
             case "MAINMENU":
-                MainMenu();
+                MainMenu(); //lol
                 confirmMenu.SetActive(false);
                 break;
         }

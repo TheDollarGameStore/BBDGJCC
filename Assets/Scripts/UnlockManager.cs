@@ -107,7 +107,18 @@ public class UnlockManager : MonoBehaviour
         }
         else
         {
-            Transitioner.instance.FadeIn(1);
+            switch (PlayerPrefs.GetInt("ActionAfterUnlock", 0))
+            {
+                case 0:
+                    Transitioner.instance.FadeIn(1);
+                    break;
+                case 1:
+                    Transitioner.instance.FadeIn(0);
+                    break;
+                case 2:
+                    Application.Quit();
+                    break;
+            }
         }
     }
 }

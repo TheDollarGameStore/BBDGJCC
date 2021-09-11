@@ -81,7 +81,7 @@ public class ITower : MonoBehaviour
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    Instantiate(particle, transform.position, Quaternion.identity);
+                    Instantiate(particle, transform.position + new Vector3(0f, 0f, 10f), Quaternion.identity);
                 }
                 Destroy(gameObject);
             }

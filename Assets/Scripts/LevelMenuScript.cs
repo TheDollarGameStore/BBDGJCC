@@ -99,7 +99,7 @@ public class LevelMenuScript : MonoBehaviour
             if(PlayerPrefs.GetInt("currentLevel") == -1)
             {
                 int endlessLevel = PlayerPrefs.GetInt("endlessLevel");
-                endlessText = "\r\nENDLESS " + (endlessLevel + 1);
+                endlessText = " - ENDLESS " + (endlessLevel + 1);
             }
 
             if (levelComplete)

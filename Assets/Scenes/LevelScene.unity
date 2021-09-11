@@ -3332,7 +3332,7 @@ MonoBehaviour:
   usedOnlyTommyTina: 1
   hasUnlock: 0
   endlessEnemyBaseAmt: 100
-  endlessEnemyIncreaseAmt: 10
+  endlessEnemyIncreaseAmt: 20
   endlessGroupSizeMultiplier: 2
   endlessInitialWait: 0
   endlessMinTimeBetweenSpawns: 2

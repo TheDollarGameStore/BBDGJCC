@@ -262,35 +262,69 @@ public class LevelManager : MonoBehaviour
 
     private void GenerateLevel1()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 5, 3);
+        // broccoli unlocked
+        // burger unlocked
+        // learn how to place broccoli
+        // 15s
+        addEnemy(Constants.Enemies.Burger, 3, 2, 4);
+        addEnemy(Constants.Enemies.Burger, 1, 12, 0);
     }
 
     private void GenerateLevel2()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 5, 2);
+        // turnip unlocked
+        // learn how to manage economy
+        // 60s
+        addEnemy(Constants.Enemies.Burger, 5, 3, 6);
+        addEnemy(Constants.Enemies.Burger, 30, 30, 1);
     }
 
     private void GenerateLevel3()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
+        // garlic unlocked
+        // fend off big waves any way you like
+        // 90s
+        addEnemy(Constants.Enemies.Burger, 5, 3, 6);
+        addEnemy(Constants.Enemies.Burger, 60, 30, 1);
+        addEnemy(Constants.Enemies.Burger, 30, 60, 1);
     }
 
     private void GenerateLevel4()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
-        addEnemy(Constants.Enemies.Doughnut, 6, 4, 4);
+        // doughnut unlocked
+        // learn the power of garlic
+        // 90s
+        addEnemy(Constants.Enemies.Burger, 5, 3, 6);
+        addEnemy(Constants.Enemies.Burger, 60, 30, 1);
+        addEnemy(Constants.Enemies.Burger, 30, 60, 1);
+        addEnemy(Constants.Enemies.Doughnut, 9, 45, 5);
     }
 
     private void GenerateLevel5()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 5, 2);
-        addEnemy(Constants.Enemies.Doughnut, 6, 4, 3);
+        // tomato unlocked
+        // fend off big waves any way you like
+        // 120s
+        addEnemy(Constants.Enemies.Burger, 5, 3, 6);
+        addEnemy(Constants.Enemies.Burger, 90, 30, 1);
+        addEnemy(Constants.Enemies.Burger, 60, 60, 1);
+        addEnemy(Constants.Enemies.Burger, 30, 90, 1);
+        addEnemy(Constants.Enemies.Doughnut, 15, 45, 5);
+        addEnemy(Constants.Enemies.Doughnut, 9, 75, 5);
     }
 
     private void GenerateLevel6()
     {
-        addEnemy(Constants.Enemies.Burger, 6, 4, 3);
-        addEnemy(Constants.Enemies.Doughnut, 6, 5, 3);
-        addEnemy(Constants.Enemies.IceCream, 6, 6, 3);
+        // ice cream unlocked
+        // learn the power of tomato
+        // 120s
+        addEnemy(Constants.Enemies.Burger, 5, 3, 6);
+        addEnemy(Constants.Enemies.Burger, 90, 30, 1);
+        addEnemy(Constants.Enemies.Burger, 60, 60, 1);
+        addEnemy(Constants.Enemies.Burger, 30, 90, 1);
+        addEnemy(Constants.Enemies.Doughnut, 15, 45, 5);
+        addEnemy(Constants.Enemies.Doughnut, 9, 75, 5);
+        addEnemy(Constants.Enemies.IceCream, 12, 60, 5);
+        addEnemy(Constants.Enemies.IceCream, 30, 90, 1);
     }
 }

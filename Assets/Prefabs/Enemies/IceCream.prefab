@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 2
-  health: 6
+  health: 12
   damage: 20
   moveSpeedSquaresPerSecond: 1.5
   row: 0

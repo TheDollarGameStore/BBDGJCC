@@ -142,7 +142,7 @@ public class ITower : MonoBehaviour
 
     private void PlayRandomize()
     {
-        if (audioSources[0] != null)
+        if (audioSources.Length >= 1)
         {
             audioSources[0].pitch = Random.Range(0.8f, 1.2f);
             audioSources[0].Play();
@@ -152,7 +152,7 @@ public class ITower : MonoBehaviour
 
     private void PlayVoiceline()
     {
-        if (audioSources[1] != null)
+        if (audioSources.Length >= 2)
         {
             audioSources[1].pitch = Random.Range(0.8f, 1.2f);
             audioSources[1].Play();

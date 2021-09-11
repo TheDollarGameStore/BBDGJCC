@@ -29,6 +29,9 @@ public class IEnemy : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public GameObject particle;
+    public GameObject enemyDieSound;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -169,6 +172,11 @@ public class IEnemy : MonoBehaviour
         if (health <= 0)
         {
             LevelManager.instance.remainingEnemies.Remove(gameObject);
+            for (int i = 0; i < 8; i++)
+            {
+                Instantiate(particle, transform.position, Quaternion.identity);
+            }
+            Instantiate(enemyDieSound, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

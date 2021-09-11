@@ -26,7 +26,9 @@ public class ITower : MonoBehaviour
     public GameObject projectile;
     public bool shooter;
 
-    private AudioSource audioSource;
+    public GameObject particle;
+
+    private AudioSource[] audioSources;
 
     private bool placed = false;
 
@@ -48,8 +50,13 @@ public class ITower : MonoBehaviour
         {
             Invoke("Shoot", cooldown);
         }
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
         placed = true;
+
+        if (Random.Range(0, 2) == 0)
+        {
+            PlayVoiceline();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -72,6 +79,10 @@ public class ITower : MonoBehaviour
 
             if (hp <= 0)
             {
+                for (int i = 0; i < 8; i++)
+                {
+                    Instantiate(particle, transform.position, Quaternion.identity);
+                }
                 Destroy(gameObject);
             }
         }
@@ -131,11 +142,20 @@ public class ITower : MonoBehaviour
 
     private void PlayRandomize()
     {
-        if (audioSource != null)
+        if (audioSources[0] != null)
         {
-            audioSource.pitch = Random.Range(0.8f, 1.2f);
-            audioSource.Play();
+            audioSources[0].pitch = Random.Range(0.8f, 1.2f);
+            audioSources[0].Play();
         }
         
+    }
+
+    private void PlayVoiceline()
+    {
+        if (audioSources[1] != null)
+        {
+            audioSources[1].pitch = Random.Range(0.8f, 1.2f);
+            audioSources[1].Play();
+        }
     }
 }

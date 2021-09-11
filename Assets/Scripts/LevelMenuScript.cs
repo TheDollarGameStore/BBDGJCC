@@ -104,16 +104,16 @@ public class LevelMenuScript : MonoBehaviour
 
             if (levelComplete)
             {
-                endMenu.transform.GetChild(1).gameObject.SetActive(false); //Sad Cabbitsu
-                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "CONGRATULATIONS!";
-                endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "CONTINUE";
+                endMenu.transform.GetChild(2).gameObject.SetActive(false); //Sad Cabbitsu
+                endMenu.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "CONGRATULATIONS!";
+                endMenu.transform.GetChild(6).GetComponentInChildren<TextMeshProUGUI>().text = "CONTINUE";
                 audioSources[0].Play();
             }
             else
             {
-                endMenu.transform.GetChild(0).gameObject.SetActive(false); //Happy Cabbitsu
-                endMenu.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "GAME OVER" + endlessText;
-                endMenu.transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().text = "RETRY";
+                endMenu.transform.GetChild(1).gameObject.SetActive(false); //Happy Cabbitsu
+                endMenu.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "GAME OVER" + endlessText;
+                endMenu.transform.GetChild(6).GetComponentInChildren<TextMeshProUGUI>().text = "RETRY";
                 audioSources[1].Play();
             }
             hudGameObject.SetActive(false);

@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a35ab80c58d054d8eea021f20190e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.45
+  delay: 3
 --- !u!82 &372297966
 AudioSource:
   m_ObjectHideFlags: 0

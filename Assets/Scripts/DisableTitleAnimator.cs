@@ -7,6 +7,8 @@ public class DisableTitleAnimator : MonoBehaviour
 
     private Animator anim;
 
+    public PlayAudioDelay playScript;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -17,6 +19,11 @@ public class DisableTitleAnimator : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         anim.enabled = false;
+    }
+
+    void PlaySound()
+    {
+        playScript.PlaySound();
     }
 
 }

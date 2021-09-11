@@ -58,9 +58,9 @@ public class EnemySpawner : MonoBehaviour
         if (gridManager.tiles != null)
         {
             int enemyRow = Random.Range(0, gridManager.rows);
-            int enemyColumn = gridManager.columns - 1;
+            int enemyColumn = gridManager.columns;
 
-            GridTile enemyTile = gridManager.tiles[enemyRow, enemyColumn];
+            GridTile enemyTile = gridManager.tiles[enemyRow, enemyColumn-1];
 
             GameObject newEnemy = Instantiate(gridManager.enemyPrefabs[(int)nextEnemy], enemyTile.transform.position + (Vector3)(Vector2.up * Constants.gridHeight / 6f), Quaternion.identity);
             IEnemy enemy = newEnemy.GetComponent<IEnemy>();

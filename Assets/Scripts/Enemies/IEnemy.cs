@@ -185,7 +185,6 @@ public class IEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            PlayRandomize();
             sr.color = Constants.damage;
             foreach (SpriteRenderer sri in srs)
             {

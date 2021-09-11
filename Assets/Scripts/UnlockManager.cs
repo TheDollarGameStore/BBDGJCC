@@ -110,12 +110,17 @@ public class UnlockManager : MonoBehaviour
             switch (PlayerPrefs.GetInt("ActionAfterUnlock", 0))
             {
                 case 0:
+
+                    PlayerPrefs.DeleteKey("ActionAfterUnlock");
                     Transitioner.instance.FadeIn(1);
                     break;
                 case 1:
+
+                    PlayerPrefs.DeleteKey("ActionAfterUnlock");
                     Transitioner.instance.FadeIn(0);
                     break;
                 case 2:
+                    PlayerPrefs.DeleteKey("ActionAfterUnlock");
                     Application.Quit();
                     break;
             }

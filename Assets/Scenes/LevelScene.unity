@@ -3331,10 +3331,10 @@ MonoBehaviour:
   remainingEnemies: []
   usedOnlyTommyTina: 1
   hasUnlock: 0
-  endlessEnemyBaseAmt: 50
-  endlessEnemyIncreaseAmt: 5
+  endlessEnemyBaseAmt: 100
+  endlessEnemyIncreaseAmt: 10
   endlessGroupSizeMultiplier: 2
-  endlessInitialWait: 5
+  endlessInitialWait: 0
   endlessMinTimeBetweenSpawns: 2
   endlessMaxTimeBetweenSpawns: 4
   levelText: {fileID: 310627109}

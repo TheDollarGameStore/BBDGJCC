@@ -145,20 +145,28 @@ public class LevelManager : MonoBehaviour
         int enemyListSize = endlessEnemyBaseAmt + (endlessEnemyIncreaseAmt * endlessLevel);
         int counter = 0;
         spawningList = new List<SpawningContainer>();
+        int timeBetweenSpawns = (endlessMaxTimeBetweenSpawns - endlessMinTimeBetweenSpawns) / 2;
 
-        while (enemyListSize > 0)
+        if (endlessLevel == 0)
         {
-            int waitTime = endlessInitialWait + (counter * UnityEngine.Random.Range(endlessMinTimeBetweenSpawns, endlessMaxTimeBetweenSpawns));
-
-            for (int i = 0; i < endlessGroupSpawnSize; i++)
+            GenerateLevel2();
+        }
+        else
+        {
+            while (enemyListSize > 0)
             {
-                if (enemyListSize > 0)
+                int waitTime = endlessInitialWait + counter * timeBetweenSpawns + UnityEngine.Random.Range(endlessMinTimeBetweenSpawns, endlessMaxTimeBetweenSpawns);
+
+                for (int i = 0; i < endlessGroupSpawnSize; i++)
                 {
-                    spawningList.Add(new SpawningContainer((Constants.Enemies)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Constants.Enemies)).Length), waitTime));
-                    enemyListSize--;
+                    if (enemyListSize > 0)
+                    {
+                        spawningList.Add(new SpawningContainer((Constants.Enemies)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Constants.Enemies)).Length), waitTime));
+                        enemyListSize--;
+                    }
                 }
+                counter++;
             }
-            counter++;
         }
     }
 

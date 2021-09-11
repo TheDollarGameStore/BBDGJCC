@@ -985,6 +985,7 @@ MonoBehaviour:
   cooldown: 1
   projectile: {fileID: 4257028524132961473, guid: f9652fbe95305dd41a1af1743fe28cde, type: 3}
   shooter: 0
+  particle: {fileID: 3049636345806531382, guid: 8c7421a0f019efd4c8bcf21d187901b2, type: 3}
   soundObject: {fileID: 1723610749016711046, guid: 07ac847de74b58748ae1d71418376248, type: 3}
   windUpSpeed: 1
   maxWind: 1.55

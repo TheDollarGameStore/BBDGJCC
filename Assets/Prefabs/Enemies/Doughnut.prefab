@@ -451,6 +451,8 @@ MonoBehaviour:
   moveSpeedSquaresPerSecond: 1
   row: 0
   col: 0
+  particle: {fileID: 5434064909045345639, guid: 1703d8defd3a05a4bbcb439353cb21b3, type: 3}
+  enemyDieSound: {fileID: 343282716640892048, guid: 611b47f370386754f8bcd644aea9642f, type: 3}
 --- !u!61 &-1645331051408903575
 BoxCollider2D:
   m_ObjectHideFlags: 0

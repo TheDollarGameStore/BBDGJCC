@@ -57,9 +57,17 @@ public class LevelMenuScript : MonoBehaviour
     public void TogglePause()
     {
         ButtonSounds.instance.PlayClick();
-        hudGameObject.SetActive(!hudGameObject.activeSelf);
-        pauseMenuGameObject.SetActive(!pauseMenuGameObject.activeSelf);
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        if (confirmMenu.activeSelf)
+        {
+            confirmMenu.SetActive(false);
+            pauseMenuGameObject.SetActive(true);
+        }
+        else
+        {
+            hudGameObject.SetActive(!hudGameObject.activeSelf);
+            pauseMenuGameObject.SetActive(!pauseMenuGameObject.activeSelf);
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        }
     }
 
     public void ContinueRetry()

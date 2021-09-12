@@ -18,7 +18,7 @@ public class DisciplineCoin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && !collected)
+        if (Mouse.current.leftButton.wasPressedThisFrame && !collected && Time.timeScale != 0)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 

@@ -19,7 +19,9 @@ public class LevelMenuScript : MonoBehaviour
     private AudioSource[] audioSources;
     private string nextScreen;
     private string previousScreen;
-    private bool gameOver = false;
+
+    [HideInInspector]
+    public bool gameOver = false;
 
     private void Awake()
     {
